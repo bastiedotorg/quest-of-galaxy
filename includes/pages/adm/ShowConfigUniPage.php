@@ -252,8 +252,11 @@ function ShowConfigUniPage()
 		$LOG->new = $config_after;
 		$LOG->save();
 
-		if($config->adm_attack == 0)
-			$GLOBALS['DATABASE']->query("UPDATE ".USERS." SET `authattack` = '0' WHERE `universe` = '".Universe::getEmulated()."';");
+		if($config->adm_attack == 0) {
+            $sql = "UPDATE %%USERS%% SET authattack = 0 WHERE universe = :universeId";
+            Database::get()->update($sql, [":universeId" => Universe::getEmulated()]);
+        }
+//			$GLOBALS['DATABASE']->query("UPDATE ".USERS." SET `authattack` = '0' WHERE `universe` = '".Universe::getEmulated()."';");
 	}
 	
 	$template	= new template();
@@ -262,6 +265,7 @@ function ShowConfigUniPage()
 
 
 	$template->assign_vars(array(
+        'config_vars'                   => Config::getConfigParameters(),
 		'se_server_parameters'			=> $LNG['se_server_parameters'],
 		'se_game_name'					=> $LNG['se_game_name'],
 		'se_uni_name'					=> $LNG['se_uni_name'],
