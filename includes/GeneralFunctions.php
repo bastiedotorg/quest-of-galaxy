@@ -214,7 +214,7 @@ function ValidateAddress($address)
 
 function message($mes, $dest = "", $time = "3", $topnav = false)
 {
-    require_once('includes/classes/class.template.php');
+    require_once('includes/classes/template.class.php');
     $template = new template();
     $template->message($mes, $dest, $time, !$topnav);
     exit;
@@ -601,7 +601,7 @@ function exceptionHandler($exception)
         $ErrSource = 1;
         $ErrName = 'System';
     }
-    require 'includes/classes/class.SupportTickets.php';
+    require 'includes/classes/SupportTickets.class.php';
     $ticketObj = new SupportTickets;
     $ticketID = $ticketObj->createTicket($ErrSource, '1', $errorType[$errno]);
     $ticketObj->createAnswer($ticketID, $ErrSource, $ErrName, $errorType[$errno], $errorText, 0);
@@ -660,4 +660,29 @@ if (!function_exists('array_replace_recursive')) {
         }
         return $array;
     }
+}
+
+function loadPage($module, $defaultPage)
+{
+    global $LNG;
+    require_once ('includes/pages/game/ShowErrorPage.class.php');
+
+    $page = HTTP::_GP('page', $defaultPage);
+    $page = str_replace(array('_', '\\', '/', '.', "\0"), '', $page);
+    $pageClass = 'Show' . ucwords($page) . 'Page';
+
+    $path = "includes/pages/$module/$pageClass.class.php";
+
+    if (!file_exists($path)) {
+        ShowErrorPage::printError($LNG['page_doesnt_exist']);
+    }
+
+    require_once($path);
+    $pageObj =  new $pageClass();
+
+    if (isset($pageObj::$requireModule) && $pageObj::$requireModule !== 0 && !isModuleAvailable($pageObj::$requireModule)) {
+        ShowErrorPage::printError($LNG['sys_module_inactive']);
+    }
+
+    return $pageObj;
 }

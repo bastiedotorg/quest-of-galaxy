@@ -91,10 +91,11 @@ class Database
 
 	protected function _query($qry, array $params, $type)
 	{
-		if (in_array($type, array("insert", "select", "update", "delete", "replace")) === false)
+        if (in_array($type, array("insert", "select", "update", "delete", "replace")) === false)
 		{
 			throw new Exception("Unsupported Query Type");
 		}
+
 
 		$this->lastInsertId = false;
 		$this->rowCount = false;
@@ -102,9 +103,8 @@ class Database
 		$qry	= str_replace($this->dbTableNames['keys'], $this->dbTableNames['names'], $qry);
 
 		/** @var $stmt PDOStatement */
-		$stmt	= $this->dbHandle->prepare($qry);
-
-		if (isset($params[':limit']) || isset($params[':offset']))
+        $stmt	= $this->dbHandle->prepare($qry);
+        if (isset($params[':limit']) || isset($params[':offset']))
 		{
 			foreach($params as $param => $value)
 			{
@@ -121,7 +121,7 @@ class Database
 
 		try {
 			$success = (count($params) !== 0 && !isset($params[':limit']) && !isset($params[':offset'])) ? $stmt->execute($params) : $stmt->execute();
-		}
+        }
 		catch (PDOException $e) {
 			throw new Exception($e->getMessage()."<br>\r\n<br>\r\nQuery-Code:".str_replace(array_keys($params), array_values($params), $qry));
 		}

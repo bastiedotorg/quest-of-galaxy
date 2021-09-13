@@ -978,7 +978,7 @@ $LNG['css_goto_homeside']					= '<a href="./index.php">Zur Startseite</a>';
 $LNG['css_server_maintrace']					= 'Server Maintenance<br><br>Spiel zurzeit geschlossen.<br><br>Grund: %s';
 
 //----------------------------------------------------------------------------//
-//class.FlyingFleetsTable.php
+//FlyingFleetsTable.class.php
 
 $LNG['cff_aproaching']						= 'Flotte besteht aus ';
 $LNG['cff_ships']						= ' Einheiten.';

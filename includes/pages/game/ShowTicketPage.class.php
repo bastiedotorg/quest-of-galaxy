@@ -24,7 +24,7 @@ class ShowTicketPage extends AbstractGamePage
 	function __construct() 
 	{
 		parent::__construct();
-		require('includes/classes/class.SupportTickets.php');
+		require('includes/classes/SupportTickets.class.php');
 		$this->ticketObj	= new SupportTickets;
 	}
 	
