@@ -1331,3 +1331,21 @@ $LNG['se_coinpot_wait_minutes'] = 'Mindestwartezeit bis Coin-Verteilung';
 $LNG['se_coinpot_random_minutes'] = 'Zufallswert Zeit Coin-Verteilung';
 
 $LNG['se_stats_in'] = 'Coin Statistiken';
+$LNG['se_server_settings'] = [
+    'game_name' => 'Spielname',
+    'font_path' => 'Pfad zur Schrift',
+    'timezone' => 'Server-Zeitzone',
+    'delete_age_messages' => 'Lösche Nachrichten nach x Tagen',
+    'delete_age_users' => 'Lösche Nutzer nach x Tagen',
+    'delete_age_inactive' => 'Lösche Inaktive nach x Tagen',
+    'reminder_active' => 'Erinnerungsmail aktivieren?',
+    'reminder_wait_time' => 'Erinnerungsmail nach x Tagen',
+    'recaptcha_active' => 'reCAPTCHA aktivieren',
+    'recaptcha_public_key' => 'reCAPTCHA Public Key',
+    'recaptcha_private_key' => 'reCAPTCHA Private Key',
+    'mail_active' => 'Mailsystem aktivieren',
+    'mail_delivery_type' => 'Versandart', 'mail_sender' => 'Absender',
+    'mail_smtp_host' => 'SMTP Host', 'mail_smtp_encryption' => 'SMTP Verschlüsselung',
+    'mail_smtp_port' => 'SMTP Port',
+    'mail_smtp_username' => 'SMTP Nutzername', 'mail_smtp_password' => 'SMTP Passwort',
+    'google_analytics_active' => 'Google Analytics aktivieren', 'google_analytics_key' => 'Google Analytics Key'];

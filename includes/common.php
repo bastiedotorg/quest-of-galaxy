@@ -48,21 +48,7 @@ require 'includes/GeneralFunctions.php';
 set_exception_handler('exceptionHandler');
 set_error_handler('errorHandler');
 
-require 'includes/classes/ArrayUtil.class.php';
-require 'includes/classes/Cache.class.php';
-require 'includes/classes/Database.class.php';
-require 'includes/classes/Config.class.php';
-require 'includes/classes/class.FleetFunctions.php';
-require 'includes/classes/HTTP.class.php';
-require 'includes/classes/Language.class.php';
-require 'includes/classes/PlayerUtil.class.php';
-require 'includes/classes/Session.class.php';
-require 'includes/classes/Universe.class.php';
-require 'includes/classes/class.Cuneros.php';
-
-require 'includes/classes/class.theme.php';
-require 'includes/classes/class.template.php';
-
+require_once("includes/autoload.inc.php");
 // Say Browsers to Allow ThirdParty Cookies (Thanks to morktadela)
 HTTP::sendHeader('P3P', 'CP="IDC DSP COR ADM DEVi TAIi PSA PSD IVAi IVDi CONi HIS OUR IND CNT"');
 define('AJAX_REQUEST', HTTP::_GP('ajax', 0));
@@ -118,8 +104,6 @@ if (MODE === 'INGAME' || MODE === 'ADMIN' || MODE === 'CRON') {
         }
 
     require 'includes/vars.php';
-    require 'includes/classes/class.BuildFunctions.php';
-    require 'includes/classes/class.PlanetRessUpdate.php';
 
     if (!AJAX_REQUEST && MODE === 'INGAME' && isModuleAvailable(MODULE_FLEET_EVENTS)) {
         require('includes/FleetHandler.php');

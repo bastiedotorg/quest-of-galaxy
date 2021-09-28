@@ -76,8 +76,7 @@ class ShowOverviewPage extends AbstractGamePage
     private function GetFleets()
     {
         global $USER, $PLANET;
-        require 'includes/classes/class.FlyingFleetsTable.php';
-        $fleetTableObj = new FlyingFleetsTable;
+        $fleetTableObj = new FlyingFleetsTable();
         $fleetTableObj->setUser($USER['id']);
         $fleetTableObj->setPlanet($PLANET['id']);
         return $fleetTableObj->renderTable();

@@ -25,7 +25,7 @@ require_once('HTML/BBCodeParser2.php');
 require 'includes/pages/game/AbstractGamePage.class.php';
 require 'includes/pages/game/ShowErrorPage.class.php';
 require 'includes/common.php';
-require 'includes/classes/class.Log.php';
+require 'includes/classes/Log.class.php';
 
 if ($USER['authlevel'] == AUTH_USR) {
     HTTP::redirectTo('game.php');
