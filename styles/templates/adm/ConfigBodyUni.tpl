@@ -5,7 +5,16 @@
 <tr>
 	<th colspan="2">{$se_server_parameters}</th>
 	<th colspan="1" width="5%">(?)</th>
-</tr><tr>
+</tr>
+	{foreach $config_vars as $key => $type}
+		<tr>
+			<td>{$key}</td>
+			<td><input type="{if $type == "string"}text{else}number{/if}"/></td>
+		</tr>
+	{/foreach}
+
+
+	<tr>
 	<td>{$se_uni_name}</td>
 	<td><input name="uni_name" value="{$uni_name}" type="text" maxlength="60"></td>
 	<td>&nbsp;</td>

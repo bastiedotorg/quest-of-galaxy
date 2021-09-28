@@ -15,7 +15,7 @@
  * @link https://github.com/jkroepke/2Moons
  */
 
-class statbuilder
+class StatBuilder
 {
 	function __construct()
 	{

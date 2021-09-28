@@ -23,7 +23,7 @@ class ShowSupportPage
 	
 	function __construct() 
 	{
-		require('includes/classes/class.SupportTickets.php');
+		require('includes/classes/SupportTickets.class.php');
 		$this->ticketObj	= new SupportTickets;
 		$this->tplObj		= new template();
 		// 2Moons 1.7TO1.6 PageClass Wrapper

@@ -26,21 +26,21 @@ require 'includes/classes/ArrayUtil.class.php';
 require 'includes/classes/Cache.class.php';
 require 'includes/classes/Database.class.php';
 require 'includes/classes/Config.class.php';
-require 'includes/classes/class.FleetFunctions.php';
+require 'includes/classes/FleetFunctions.class.php';
 require 'includes/classes/Language.class.php';
 require 'includes/classes/PlayerUtil.class.php';
 require 'includes/classes/Session.class.php';
 require 'includes/classes/Universe.class.php';
 require 'includes/classes/Cronjob.class.php';
 
-require 'includes/classes/class.theme.php';
-require 'includes/classes/class.template.php';
+require 'includes/classes/Theme.class.php';
+require 'includes/classes/template.class.php';
 
 
 require 'includes/vars.php';
 
-require 'includes/classes/class.BuildFunctions.php';
-require 'includes/classes/class.PlanetRessUpdate.php';
+require 'includes/classes/BuildFunctions.class.php';
+require 'includes/classes/ResourceUpdate.class.php';
 
 foreach(Cronjob::getNeedTodoExecutedJobs() as $cronjobID) {
     Cronjob::execute($cronjobID);
