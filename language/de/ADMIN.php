@@ -1330,6 +1330,7 @@ $LNG['se_referral_earn'] = 'Ref-Faktor bei Coin claim';
 $LNG['se_coinpot_wait_minutes'] = 'Mindestwartezeit bis Coin-Verteilung';
 $LNG['se_coinpot_random_minutes'] = 'Zufallswert Zeit Coin-Verteilung';
 
+$LNG['se_stats_in'] = 'Coin Statistiken';
 $LNG['se_server_settings'] = [
     'game_name' => 'Spielname',
     'font_path' => 'Pfad zur Schrift',
