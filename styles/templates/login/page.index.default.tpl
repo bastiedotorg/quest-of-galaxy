@@ -20,10 +20,20 @@
             <div class="col-xl-6 col-12">
                 <div class="card">
                     <div class="card-body">
+                        <h6 class="card-text">Nur noch</h6>
+                        <h4 class="text-center" id="countdown"></h4>
+                        <h6 class="card-text">Dann startet Quest-of-Galaxy!</h6>
+
                         <img class="img-fluid" src="styles/resource/images/header.png"/>
                         <p class="lead">{$descText}</p>
-                        <ul id="desc_list">{foreach $gameInformations as $info}
-                                <li>{$info}</li>{/foreach}</ul>
+                        <ul id="desc_list">
+                            <li>Weltraum-Strategiespiel in Echtzeit</li>
+                            <li>Erobere fremde Planeten</li>
+                            <li>Kostenlose Registierung</li>
+                            <li>Zeite dein Geschick gegen hunderte User</li>
+                            <li>Cuneros für alle aktiven User</li>
+                            <li>27 Gebäude- und 14 Schiffstypen</li>
+                            </ul>
                     </div>
                 </div>
             </div>
@@ -80,7 +90,46 @@
             </div>
         </div>
     </main>
+{literal}
+    <script>
+        function pad(num, size) {
+            var s = "000000000" + num;
+            return s.substr(s.length-size);
+        }
+        // Set the date we're counting down to
+        var countDownDate = new Date("Sep 26, 2021 15:00:00").getTime();
+
+        // Update the count down every 1 second
+        function updateCD() {
+
+            // Get today's date and time
+            var now = new Date().getTime();
+
+            // Find the distance between now and the count down date
+            var distance = countDownDate - now;
+
+            // Time calculations for days, hours, minutes and seconds
+            var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+            // Display the result in the element with id="demo"
+            document.getElementById("countdown").innerHTML = days + " Tage " + pad(hours,2) + ":"
+                + pad(minutes,2) + ":" + pad(seconds,2) + "";
+
+            // If the count down is finished, write some text
+            if (distance < 0) {
+                clearInterval(x);
+                document.getElementById("countdown").innerHTML = "JETZT ANMELDEN!";
+            }
+            window.setTimeout(function (){updateCD()}, 1000);
+        }
+        updateCD();
+    </script>
+{/literal}
 {/block}
 {block name="script" append}
     <script>{if $code}alert({$code|json});{/if}</script>
+
 {/block}
