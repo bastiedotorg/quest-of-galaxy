@@ -1380,3 +1380,5 @@ $LNG['fl_capacity_title'] = 'Treibstoff und transportierte Rohstoffe';
 $LNG['fl_capacity_fuel'] = 'Treibstoff';
 
 $LNG['fleetDealer_info'] = 'Hier kannst du deine alten Schiffe beim Schrotthändler gegen Rohstoffe tauschen.';
+
+$LNG['storage_too_small'] = 'Speicher zu klein!';

@@ -174,8 +174,20 @@ class BuildFunctions
         } else {
             $time = floor($time * 3600);
         }
-
         return max($time, $config->min_build_time);
+    }
+
+    public static function getOverflowTime($costOverflow, $resourceTable)
+    {
+        $costOverflowTime = [];
+        foreach ($costOverflow as $key => $element) {
+            if ($element > $resourceTable[$key]['max']) {
+                $costOverflowTime[$key] = -1;
+            } elseif ($element > 0) {
+                $costOverflowTime[$key] = time() + $element * 3600 / max(1, $resourceTable[$key]['production']);
+            }
+        }
+        return $costOverflowTime;
     }
 
     public static function isElementBuyable($USER, $PLANET, $Element, $elementPrice = NULL, $forDestroy = false, $forLevel = NULL)

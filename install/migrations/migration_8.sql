@@ -55,3 +55,4 @@ create table %PREFIX%statistics
         primary key (id)
 );
 
+INSERT INTO `%PREFIX%statistics` (`id`, `stat_key`, `stat_value`) VALUES (NULL, 'coin_in', '0'), (NULL, 'coin_out', '0');

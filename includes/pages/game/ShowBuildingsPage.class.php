@@ -40,17 +40,17 @@ class ShowBuildingsPage extends AbstractGamePage
 
         $costResources = BuildFunctions::getElementPrice($USER, $PLANET, $Element, $BuildMode == 'destroy', $BuildLevel);
 
-        if (isset($costResources[901])) {
-            $PLANET[$resource[901]] += $costResources[901];
+        if (isset($costResources[RESS_METAL])) {
+            $PLANET[$resource[RESS_METAL]] += $costResources[RESS_METAL];
         }
-        if (isset($costResources[902])) {
-            $PLANET[$resource[902]] += $costResources[902];
+        if (isset($costResources[RESS_CRYSTAL])) {
+            $PLANET[$resource[RESS_CRYSTAL]] += $costResources[RESS_CRYSTAL];
         }
-        if (isset($costResources[903])) {
-            $PLANET[$resource[903]] += $costResources[903];
+        if (isset($costResources[RESS_DEUTERIUM])) {
+            $PLANET[$resource[RESS_DEUTERIUM]] += $costResources[RESS_DEUTERIUM];
         }
-        if (isset($costResources[921])) {
-            $USER[$resource[921]] += $costResources[921];
+        if (isset($costResources[RESS_DARKMATTER])) {
+            $USER[$resource[RESS_DARKMATTER]] += $costResources[RESS_DARKMATTER];
         }
         array_shift($CurrentQueue);
         if (count($CurrentQueue) == 0) {
@@ -370,19 +370,23 @@ class ShowBuildingsPage extends AbstractGamePage
                 $requireEnergy = round($requireEnergy * $config->energySpeed);
 
                 if ($requireEnergy < 0) {
-                    $infoEnergy = sprintf($LNG['bd_need_engine'], pretty_number(abs($requireEnergy)), $LNG['tech'][911]);
+                    $infoEnergy = sprintf($LNG['bd_need_engine'], pretty_number(abs($requireEnergy)), $LNG['tech'][RESS_ENGERGY]);
                 } else {
-                    $infoEnergy = sprintf($LNG['bd_more_engine'], pretty_number(abs($requireEnergy)), $LNG['tech'][911]);
+                    $infoEnergy = sprintf($LNG['bd_more_engine'], pretty_number(abs($requireEnergy)), $LNG['tech'][RESS_ENGERGY]);
                 }
             }
+            $this->computeResourceTable(); // needed for cost overflowtime
 
             $costResources = BuildFunctions::getElementPrice($USER, $PLANET, $Element, false, $levelToBuild + 1);
             $costOverflow = BuildFunctions::getRestPrice($USER, $PLANET, $Element, $costResources);
+
+
             $elementTime = BuildFunctions::getBuildingTime($USER, $PLANET, $Element, $costResources);
             $destroyResources = BuildFunctions::getElementPrice($USER, $PLANET, $Element, true);
             $destroyTime = BuildFunctions::getBuildingTime($USER, $PLANET, $Element, $destroyResources);
             $destroyOverflow = BuildFunctions::getRestPrice($USER, $PLANET, $Element, $destroyResources);
             $buyable = $QueueCount != 0 || BuildFunctions::isElementBuyable($USER, $PLANET, $Element, $costResources);
+            $costOverflowTime = BuildFunctions::getOverflowTime($costOverflow, $this->resourceTable);
 
             $BuildInfoList[$Element] = array(
                 'level' => $PLANET[$resource[$Element]],
@@ -391,6 +395,7 @@ class ShowBuildingsPage extends AbstractGamePage
                 'costResources' => $costResources,
                 'costOverflow' => $costOverflow,
                 'elementTime' => $elementTime,
+                'costOverflowTime' => $costOverflowTime,
                 'destroyResources' => $destroyResources,
                 'destroyTime' => $destroyTime,
                 'destroyOverflow' => $destroyOverflow,
