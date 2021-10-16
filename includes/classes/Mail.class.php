@@ -53,24 +53,22 @@ class Mail
 
         $config = Config::get();
 
-        if ($config->mail_use == 2) {
+        if ($config->mail_delivery_type == 'smtp') {
             $mail->IsSMTP();
-            $mail->SMTPSecure = $config->smtp_ssl;
-            $mail->Host = $config->smtp_host;
-            $mail->Port = $config->smtp_port;
+            $mail->SMTPSecure = $config->mail_smtp_encryption;
+            $mail->Host = $config->mail_smtp_host;
+            $mail->Port = $config->mail_smtp_port;
 
-            if ($config->smtp_user != '') {
+            if ($config->mail_smtp_username != '') {
                 $mail->SMTPAuth = true;
-                $mail->Username = $config->smtp_user;
-                $mail->Password = $config->smtp_pass;
+                $mail->Username = $config->mail_smtp_username;
+                $mail->Password = $config->mail_smtp_password;
             }
-        } elseif ($config->mail_use == 0) {
-            $mail->IsMail();
         } else {
             throw new Exception("sendmail is deprecated, use SMTP instead!");
         }
 
-        $mailFromAddress = $config->smtp_sendmail;
+        $mailFromAddress = $config->mail_sender;
         $mailFromName = $config->game_name;
         $mail->Timeout = 15;
         $mail->CharSet = 'UTF-8';

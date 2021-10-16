@@ -97,16 +97,16 @@ class VarsBuildCache implements BuildCache
 			);
 			
 			$ProdGrid[$varsRow['elementID']]['production']	= array(
-				901	=> $varsRow['production901'],
-				902	=> $varsRow['production902'],
-				903	=> $varsRow['production903'],
-				911	=> $varsRow['production911'],
+				RESS_METAL	=> $varsRow['production901'],
+				RESS_CRYSTAL	=> $varsRow['production902'],
+				RESS_DEUTERIUM	=> $varsRow['production903'],
+				RESS_ENGERGY	=> $varsRow['production911'],
 			);
 			
 			$ProdGrid[$varsRow['elementID']]['storage']	= array(
-				901	=> $varsRow['storage901'],
-				902	=> $varsRow['storage902'],
-				903	=> $varsRow['storage903'],
+				RESS_METAL	=> $varsRow['storage901'],
+				RESS_CRYSTAL	=> $varsRow['storage902'],
+				RESS_DEUTERIUM	=> $varsRow['storage903'],
 			);
 			
 			if(array_filter($ProdGrid[$varsRow['elementID']]['production']))
@@ -166,7 +166,7 @@ class VarsBuildCache implements BuildCache
 			'CombatCaps'	=> $CombatCaps,
 			'resource'		=> $resource,
 			'pricelist'		=> $pricelist,
-			'requeriments'	=> $requirements,
+			'requirements'	=> $requirements,
 		);
 	}
 }

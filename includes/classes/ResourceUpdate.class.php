@@ -77,7 +77,7 @@ class ResourceUpdate
 
         $Hash[] = $this->config->resource_multiplier;
         $Hash[] = $this->config->storage_multiplier;
-        $Hash[] = $this->config->energySpeed;
+        $Hash[] = $this->config->energy_multiplier;
         $Hash[] = $this->USER['factor']['Resource'];
         $Hash[] = $this->USER['factor']['Energy'];
         $Hash[] = $this->PLANET[$resource[22]];
@@ -136,40 +136,24 @@ class ResourceUpdate
         }
     }
 
+    private function calcResourceStorage($ress)
+    {
+        $Theoretical = $this->ProductionTime * (($this->config->{$ress . "_basic_income"} * $this->config->resource_multiplier) + $this->PLANET[$ress . '_perhour']) / 3600;
+
+        $MaxStorage = $this->PLANET[$ress . '_max'] * $this->config->max_resources_overflow;
+        if ($this->PLANET[$ress] <= $MaxStorage) {
+            $this->PLANET[$ress] = $this->PLANET[$ress] + $Theoretical;
+        }
+        $this->PLANET[$ress] = min($MaxStorage, max($this->PLANET[$ress], 0));
+    }
+
     private function ExecCalc()
     {
-        if ($this->PLANET['planet_type'] == 3)
+        if ($this->PLANET['planet_type'] == TYPE_MOON)
             return;
-
-        $MaxMetalStorage = $this->PLANET['metal_max'] * $this->config->max_overflow;
-        $MaxCristalStorage = $this->PLANET['crystal_max'] * $this->config->max_overflow;
-        $MaxDeuteriumStorage = $this->PLANET['deuterium_max'] * $this->config->max_overflow;
-
-        $MetalTheoretical = $this->ProductionTime * (($this->config->metal_basic_income * $this->config->resource_multiplier) + $this->PLANET['metal_perhour']) / 3600;
-
-        if ($MetalTheoretical < 0) {
-            $this->PLANET['metal'] = max($this->PLANET['metal'] + $MetalTheoretical, 0);
-        } elseif ($this->PLANET['metal'] <= $MaxMetalStorage) {
-            $this->PLANET['metal'] = min($this->PLANET['metal'] + $MetalTheoretical, $MaxMetalStorage);
+        foreach(['metal', 'crystal', 'deuterium'] as $ress) {
+            $this->calcResourceStorage($ress);
         }
-
-        $CristalTheoretical = $this->ProductionTime * (($this->config->crystal_basic_income * $this->config->resource_multiplier) + $this->PLANET['crystal_perhour']) / 3600;
-        if ($CristalTheoretical < 0) {
-            $this->PLANET['crystal'] = max($this->PLANET['crystal'] + $CristalTheoretical, 0);
-        } elseif ($this->PLANET['crystal'] <= $MaxCristalStorage) {
-            $this->PLANET['crystal'] = min($this->PLANET['crystal'] + $CristalTheoretical, $MaxCristalStorage);
-        }
-
-        $DeuteriumTheoretical = $this->ProductionTime * (($this->config->deuterium_basic_income * $this->config->resource_multiplier) + $this->PLANET['deuterium_perhour']) / 3600;
-        if ($DeuteriumTheoretical < 0) {
-            $this->PLANET['deuterium'] = max($this->PLANET['deuterium'] + $DeuteriumTheoretical, 0);
-        } elseif ($this->PLANET['deuterium'] <= $MaxDeuteriumStorage) {
-            $this->PLANET['deuterium'] = min($this->PLANET['deuterium'] + $DeuteriumTheoretical, $MaxDeuteriumStorage);
-        }
-
-        $this->PLANET['metal'] = max($this->PLANET['metal'], 0);
-        $this->PLANET['crystal'] = max($this->PLANET['crystal'], 0);
-        $this->PLANET['deuterium'] = max($this->PLANET['deuterium'], 0);
     }
 
     public static function getProd($Calculation, $Element = false)
@@ -289,8 +273,8 @@ class ResourceUpdate
         $this->PLANET['crystal_max'] = $temp[RESS_CRYSTAL]['max'] * $this->config->storage_multiplier * (1 + $this->USER['factor']['ResourceStorage']);
         $this->PLANET['deuterium_max'] = $temp[RESS_DEUTERIUM]['max'] * $this->config->storage_multiplier * (1 + $this->USER['factor']['ResourceStorage']);
 
-        $this->PLANET['energy'] = round($temp[RESS_ENGERGY]['plus'] * $this->config->energySpeed * (1 + $this->USER['factor']['Energy']));
-        $this->PLANET['energy_used'] = $temp[911]['minus'] * $this->config->energySpeed;
+        $this->PLANET['energy'] = round($temp[RESS_ENGERGY]['plus'] * $this->config->energy_multiplier * (1 + $this->USER['factor']['Energy']));
+        $this->PLANET['energy_used'] = $temp[RESS_ENGERGY]['minus'] * $this->config->energy_multiplier;
         if ($this->PLANET['energy_used'] == 0) {
             $this->PLANET['metal_perhour'] = 0;
             $this->PLANET['crystal_perhour'] = 0;
@@ -676,7 +660,6 @@ class ResourceUpdate
     public function SavePlanetToDB($USER = NULL, $PLANET = NULL)
     {
         global $resource, $reslist;
-
         if (is_null($USER))
             global $USER;
 

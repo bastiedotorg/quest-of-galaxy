@@ -107,7 +107,7 @@ class BuildFunctions
         return $price;
     }
 
-    public static function isTechnologieAccessible($USER, $PLANET, $Element)
+    public static function isTechnologyAccessible($USER, $PLANET, $Element)
     {
         global $requirements, $resource;
 
@@ -166,7 +166,7 @@ class BuildFunctions
                 }
             }
 
-            $time = $elementCost / (1000 * (1 + $Level)) / ($config->game_speed / 2500) * pow(1 - $config->factor_university / 100, $PLANET[$resource[6]]) * (1 + $USER['factor']['ResearchTime']);
+            $time = $elementCost / (1000 * (1 + $Level)) / ($config->game_speed / 2500) * pow(1 - $config->research_factor / 100, $PLANET[$resource[6]]) * (1 + $USER['factor']['ResearchTime']);
         }
 
         if ($forDestroy) {
@@ -174,7 +174,7 @@ class BuildFunctions
         } else {
             $time = floor($time * 3600);
         }
-        return max($time, $config->min_build_time);
+        return max($time, $config->minimum_build_time);
     }
 
     public static function getOverflowTime($costOverflow, $resourceTable)
@@ -236,19 +236,19 @@ class BuildFunctions
         }
 
         $BuildArray = !empty($PLANET['b_hangar_id']) ? unserialize($PLANET['b_hangar_id']) : array();
-        $MaxMissiles = $PLANET[$resource[44]] * 10 * max(Config::get()->silo_factor, 1);
+        $MaxMissiles = $PLANET[$resource[BUILDING_SILO]] * 10 * max(Config::get()->silo_factor, 1);
 
         foreach ($BuildArray as $ElementArray) {
             if (isset($Missiles[$ElementArray[0]]))
                 $Missiles[$ElementArray[0]] += $ElementArray[1];
         }
 
-        $ActuMissiles = $Missiles[502] + (2 * $Missiles[503]);
+        $ActuMissiles = $Missiles[MISSILE_DEFENSE] + (2 * $Missiles[MISSILE_INTERPLANET]);
         $MissilesSpace = max(0, $MaxMissiles - $ActuMissiles);
 
         return array(
-            502 => $MissilesSpace,
-            503 => floor($MissilesSpace / 2),
+            MISSILE_DEFENSE => $MissilesSpace,
+            MISSILE_INTERPLANET => floor($MissilesSpace / 2),
         );
     }
 
