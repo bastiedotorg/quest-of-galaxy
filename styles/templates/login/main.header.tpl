@@ -22,7 +22,7 @@
 	<meta name="theme-color" content="#ffffff">
 	<link rel="shortcut icon" href="./favicons/favicon.ico" type="image/x-icon">
 
-	<title>{block name="title"} - {$gameName}{/block}</title>
+	<title>{block name="title"} - {$config->game_name}{/block}</title>
 	<meta name="keywords" content="">
 	<meta name="description" content="Massively Multiplayer Online Strategy Game (MMOSG). Space Browsergame with competition between Alliances. Free-to-play, win-to-pay style.">
 	<!-- open graph protocol -->

@@ -46,18 +46,18 @@
 	var LoginConfig = {
     'isMultiUniverse': {$isMultiUniverse|json},
 	'unisWildcast': {$unisWildcast|json},
-	'referralEnable' : {$referralEnable|json},
+	'referralEnable' : {$config->referral_active|json},
 	'basePath' : {$basepath|json}
 };
 </script>
-{if $analyticsEnable}
+{if $config->google_analytics_active}
 <script type="text/javascript" src="http://www.google-analytics.com/ga.js"></script>
 <script type="text/javascript">
 try{
-var pageTracker = _gat._getTracker("{$analyticsUID}");
+var pageTracker = _gat._getTracker("{$config->google_analytics_key}");
 pageTracker._trackPageview();
 } catch(err) {}
-initializeCookieBanner();>
+initializeCookieBanner();
 </script>
 {/if}
 </body>

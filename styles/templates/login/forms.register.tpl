@@ -15,7 +15,7 @@
         </div>
     </div>
     {if !empty($externalAuth.account)}
-        {if $facebookEnable}
+        {if $config->facebook_active}
             <div class="row">
                 <div class="col">
                     <label>{$LNG.registerFacebookAccount}</label>
@@ -26,7 +26,7 @@
             </div>
         {/if}
     {elseif empty($referralData.id)}
-        {if $facebookEnable}
+        {if $config->facebook_active}
             <div class="row">
                 <div class="col">
                     <label>{$LNG.registerFacebookAccount}</label>
@@ -114,14 +114,14 @@
             </div>
         </div>
     {/if}
-    {if $recaptchaEnable}
+    {if $config->recaptcha_active}
         <div class="row">
             <div class="col">
                 <label class="form-label">{$LNG.registerCaptcha}</label>
                 <!--<span class="inputDesc">{$LNG.registerCaptchaDesc}</span>-->
             </div>
             <div class="col">
-                <div class="g-recaptcha" data-sitekey="{$recaptchaPublicKey}"></div>
+                <div class="g-recaptcha" data-sitekey="{$config->recaptcha_public_key}"></div>
             </div>
         </div>
     {/if}

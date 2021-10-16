@@ -65,12 +65,12 @@
                                            placeholder="{$LNG.loginPassword}" name="password">
                                 </div>
                                 <div class="mb-3">
-                                    {if $verkey["capaktiv"]==1}
+                                    {if $config->recaptcha_active}
                                         <script src='https://www.google.com/recaptcha/api.js'></script>
                                         <script>function onSubmit() {
                                                 document.getElementById("login").submit();
                                             } </script>
-                                        <input class="g-recaptcha btn btn-primary" data-sitekey="{$verkey["cappublic"]}"
+                                        <input class="g-recaptcha btn btn-primary" data-sitekey="{$config->recaptcha_public_key}"
                                                data-callback="onSubmit"
                                                type="submit" value="{$LNG.loginButton}">
                                     {else}
@@ -79,7 +79,7 @@
                                 </div>
                             </div>
                         </form>
-                        {if $facebookEnable}
+                        {if $config->facebook_active}
                             <a href="#" data-href="index.php?page=externalAuth&method=facebook" class="fb_login"><img
                                         src="styles/resource/images/facebook/fb-connect-large.png" alt=""></a>
                         {/if}

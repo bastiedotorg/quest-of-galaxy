@@ -1,9 +1,12 @@
 {block name="title" prepend}{$LNG.fcm_info}{/block}
 {block name="content"}
-	<div class="card">
-		<div class="card-body">
-			<p class="alert alert-warning">{$message}</p>
-			{if !empty($redirectButtons)}<p>{foreach $redirectButtons as $button}<a class="btn btn-primary" href="{$button.url}">{$button.label}</a>{/foreach}</p>{/if}
-		</div>
-	</div>
+    <div class="card">
+        <div class="card-body">
+            <p class="alert alert-warning">{$message}</p>
+            {if !empty($redirectButtons)}
+                {foreach $redirectButtons as $button}<a href="{$button.url}"
+                                                        class="btn btn-primary">{$button.label}</a>{/foreach}
+            {/if}
+        </div>
+    </div>
 {/block}
