@@ -223,7 +223,7 @@ function message($mes, $dest = "", $time = "3", $topnav = false)
 function CalculateMaxPlanetFields($planet)
 {
     global $resource;
-    return $planet['field_max'] + ($planet[$resource[33]] * FIELDS_BY_TERRAFORMER) + ($planet[$resource[41]] * FIELDS_BY_MOONBASIS_LEVEL);
+    return $planet['field_max'] + ($planet[$resource[BUILDING_TERRA]] * FIELDS_BY_TERRAFORMER) + ($planet[$resource[BUILDING_MOONBASE]] * FIELDS_BY_MOONBASIS_LEVEL);
 }
 
 function pretty_time($seconds)
@@ -330,9 +330,9 @@ function CheckNoobProtec($OwnerPlayer, $TargetPlayer, $Player)
 {
     $config = Config::get();
     if (
-        $config->noobprotection == 0
-        || $config->noobprotectiontime == 0
-        || $config->noobprotectionmulti == 0
+        $config->noob_protection_active
+        || $config->noob_protection_points == 0
+        || $config->noob_protection_multiplier == 0
         || $Player['banaday'] > TIMESTAMP
         || $Player['onlinetime'] < TIMESTAMP - INACTIVE
     ) {
@@ -347,15 +347,15 @@ function CheckNoobProtec($OwnerPlayer, $TargetPlayer, $Player)
                 ODER weniger als 5.000 hat.
             */
             // Addional Comment: Letzteres ist eigentlich sinnfrei, bitte testen.a
-            ($TargetPlayer['total_points'] <= $config->noobprotectiontime) && // Default: 25.000
-            ($OwnerPlayer['total_points'] > $TargetPlayer['total_points'] * $config->noobprotectionmulti)),
+            ($TargetPlayer['total_points'] <= $config->noob_protection_points) && // Default: 25.000
+            ($OwnerPlayer['total_points'] > $TargetPlayer['total_points'] * $config->noob_protection_multiplier)),
         'StrongPlayer' => (
             /* WAHR:
                 Wenn Spieler weniger als 5000 Punkte hat UND
                 Mehr als das funfache der eigende Punkte hat
             */
-            ($OwnerPlayer['total_points'] < $config->noobprotectiontime) && // Default: 5.000
-            ($OwnerPlayer['total_points'] * $config->noobprotectionmulti < $TargetPlayer['total_points'])),
+            ($OwnerPlayer['total_points'] < $config->noob_protection_points) && // Default: 5.000
+            ($OwnerPlayer['total_points'] * $config->noob_protection_multiplier < $TargetPlayer['total_points'])),
     );
 }
 
@@ -389,7 +389,7 @@ function floatToString($number, $Pro = 0, $output = false)
 function isModuleAvailable($ID)
 {
     global $USER;
-    $modules = explode(';', Config::get()->moduls);
+    $modules = explode(';', Config::get()->modules);
 
     if (!isset($modules[$ID])) {
         $modules[$ID] = 1;
@@ -457,7 +457,7 @@ function ClearCache()
 function allowedTo($side)
 {
     global $USER;
-    return ($USER['authlevel'] == AUTH_ADM || (isset($USER['rights']) && $USER['rights'][$side] == 1));
+    return ($USER['authlevel'] >= AUTH_ADM); // || (isset($USER['rights']) && $USER['rights'][$side] == 1));
 }
 
 function isactiveDMExtra($Extra, $Time)
@@ -665,7 +665,7 @@ if (!function_exists('array_replace_recursive')) {
 function loadPage($module, $defaultPage)
 {
     global $LNG;
-    require_once ('includes/pages/game/ShowErrorPage.class.php');
+    require_once('includes/pages/ShowErrorPage.class.php');
 
     $page = HTTP::_GP('page', $defaultPage);
     $page = str_replace(array('_', '\\', '/', '.', "\0"), '', $page);

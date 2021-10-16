@@ -17,17 +17,15 @@
 
 define('MODE', 'INGAME');
 define('ROOT_PATH', str_replace('\\', '/', dirname(__FILE__)) . '/');
-set_include_path(ROOT_PATH . 'includes/libs/BBCodeParser2/' . ':' . ROOT_PATH . ':' . get_include_path());
-require_once('HTML/BBCodeParser2.php');
-
-require 'includes/pages/game/AbstractGamePage.class.php';
 require 'includes/common.php';
+require 'includes/pages/game/AbstractGamePage.class.php';
 
 /** @var $LNG Language */
 
 $pageObj = loadPage('game', 'overview');
 $mode = HTTP::_GP('mode', 'show');
 
+$pageProps	= get_class_vars(get_class($pageObj));
 
 if (!is_callable(array($pageObj, $mode))) {
     if (!isset($pageProps['defaultController']) || !is_callable(array($pageObj, $pageProps['defaultController']))) {

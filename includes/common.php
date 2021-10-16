@@ -40,6 +40,8 @@ header('Content-Type: text/html; charset=UTF-8');
 define('TIMESTAMP', time());
 
 require 'includes/constants.php';
+require 'pages/AbstractPage.class.php';
+require 'pages/ShowErrorPage.class.php';
 
 ini_set('log_errors', 'On');
 ini_set('error_log', 'includes/error.log');
@@ -114,16 +116,22 @@ if (MODE === 'INGAME' || MODE === 'ADMIN' || MODE === 'CRON') {
 
     $sql = "SELECT 
 	user.*,
+       COUNT(planets.id) as current_planet_count,
+    statpoints.total_points,
 	COUNT(message.message_id) as messages
 	FROM %%USERS%% as user
 	LEFT JOIN %%MESSAGES%% as message ON message.message_owner = user.id AND message.message_unread = :unread
-	WHERE user.id = :userId
+    LEFT JOIN %%STATPOINTS%% as statpoints ON statpoints.id_owner = user.id
+    LEFT JOIN %%PLANETS%% as planets ON planets.id_owner = user.id
+	WHERE user.id = :userId AND statpoints.stat_type = :statType AND planet_type = :planetType AND destruyed = :destroyed
 	GROUP BY message.message_owner;";
-
 
     $USER = $db->selectSingle($sql, array(
         ':unread' => 1,
-        ':userId' => $session->userId
+        ':userId' => $session->userId,
+        ':statType' => 1,
+        ':planetType' => TYPE_PLANET,
+        ':destroyed' => 0
     ));
 
     if (!$session->isValidSession() && isset($_GET['page']) && $_GET['page'] == "raport" && isset($_GET['raport']) && count($_GET) == 2 && MODE === 'INGAME') {
@@ -147,7 +155,7 @@ if (MODE === 'INGAME' || MODE === 'ADMIN' || MODE === 'CRON') {
         $THEME->setUserTheme($USER['dpath']);
     }
 
-    if ($config->game_disable == 0 && $USER['authlevel'] == AUTH_USR) {
+    if ($config->game_disable && $USER['authlevel'] == AUTH_USR) {
         ShowErrorPage::printError($LNG['sys_closed_game'] . '<br><br>' . $config->close_reason, false);
     }
 
