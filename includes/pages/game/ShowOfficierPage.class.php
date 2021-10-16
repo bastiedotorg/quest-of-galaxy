@@ -71,7 +71,7 @@ class ShowOfficierPage extends AbstractGamePage
 		
 		$costResources		= BuildFunctions::getElementPrice($USER, $PLANET, $Element);
 			
-		if (!BuildFunctions::isTechnologieAccessible($USER, $PLANET, $Element) 
+		if (!BuildFunctions::isTechnologyAccessible($USER, $PLANET, $Element)
 			|| !BuildFunctions::isElementBuyable($USER, $PLANET, $Element, $costResources) 
 			|| $pricelist[$Element]['max'] <= $USER[$resource[$Element]]) {
             $this->error = $LNG['officer_not_bought'];
@@ -139,7 +139,7 @@ class ShowOfficierPage extends AbstractGamePage
 		{
 			foreach($reslist['officier'] as $Element)
 			{
-				if (!BuildFunctions::isTechnologieAccessible($USER, $PLANET, $Element))
+				if (!BuildFunctions::isTechnologyAccessible($USER, $PLANET, $Element))
 					continue;
 					
 				$costResources		= BuildFunctions::getElementPrice($USER, $PLANET, $Element);

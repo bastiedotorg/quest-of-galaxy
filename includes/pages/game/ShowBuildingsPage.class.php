@@ -131,11 +131,11 @@ class ShowBuildingsPage extends AbstractGamePage
         global $PLANET, $USER, $resource, $reslist, $pricelist;
 
         if (!in_array($Element, $reslist['allow'][$PLANET['planet_type']])
-            || !BuildFunctions::isTechnologieAccessible($USER, $PLANET, $Element)
+            || !BuildFunctions::isTechnologyAccessible($USER, $PLANET, $Element)
             || ($Element == 31 && $USER["b_tech_planet"] != 0)
-            || (($Element == 15 || $Element == 21) && !empty($PLANET['b_hangar_id']))
+            || (($Element == BUILDING_NANITE || $Element == BUILDING_SHIPYARD) && !empty($PLANET['b_hangar_id']))
             || (!$AddMode && $PLANET[$resource[$Element]] == 0)
-            || (!$AddMode && $Element == 33)
+            || (!$AddMode && $Element == BUILDING_TERRA)
             || (!$AddMode && $Element == 44 && $PLANET[$resource[503]] + $PLANET[$resource[502]] > 0)
         )
             return;
@@ -161,7 +161,7 @@ class ShowBuildingsPage extends AbstractGamePage
 
         $config = Config::get();
 
-        if (($config->max_elements_build != 0 && $ActualCount == $config->max_elements_build)
+        if (($config->max_queue_build != 0 && $ActualCount == $config->max_queue_build)
             || ($AddMode && $PLANET["field_current"] >= ($CurrentMaxFields - $DemolishedQueue))) {
             return;
         }
@@ -178,17 +178,17 @@ class ShowBuildingsPage extends AbstractGamePage
             if (!BuildFunctions::isElementBuyable($USER, $PLANET, $Element, $costResources))
                 return;
 
-            if (isset($costResources[901])) {
-                $PLANET[$resource[901]] -= $costResources[901];
+            if (isset($costResources[RESS_METAL])) {
+                $PLANET[$resource[RESS_METAL]] -= $costResources[RESS_METAL];
             }
-            if (isset($costResources[902])) {
-                $PLANET[$resource[902]] -= $costResources[902];
+            if (isset($costResources[RESS_CRYSTAL])) {
+                $PLANET[$resource[RESS_CRYSTAL]] -= $costResources[RESS_CRYSTAL];
             }
-            if (isset($costResources[903])) {
-                $PLANET[$resource[903]] -= $costResources[903];
+            if (isset($costResources[RESS_DEUTERIUM])) {
+                $PLANET[$resource[RESS_DEUTERIUM]] -= $costResources[RESS_DEUTERIUM];
             }
-            if (isset($costResources[921])) {
-                $USER[$resource[921]] -= $costResources[921];
+            if (isset($costResources[RESS_DARKMATTER])) {
+                $USER[$resource[RESS_DARKMATTER]] -= $costResources[RESS_DARKMATTER];
             }
 
             $elementTime = BuildFunctions::getBuildingTime($USER, $PLANET, $Element, $costResources);
@@ -266,7 +266,7 @@ class ShowBuildingsPage extends AbstractGamePage
     protected function FinishBuilding()
     {
 
-        global $PLANET, $USER, $resource, $reslist, $pricelist;
+        global $PLANET, $USER, $resource, $LNG;
         $CurrentQueue = unserialize($PLANET['b_building_id']);
         if (empty($CurrentQueue)) {
             $PLANET['b_building_id'] = '';
@@ -274,8 +274,9 @@ class ShowBuildingsPage extends AbstractGamePage
             return false;
         }
         $cost = $this->getFinishCost($CurrentQueue[0]);
-        if ($USER[$resource[921]] >= $cost) {
-            $USER[$resource[921]] -= $cost;
+        if ($USER[$resource[RESS_DARKMATTER]] >= $cost) {
+            $USER[$resource[RESS_DARKMATTER]] -= $cost;
+            Notifier::get()->addNotification($LNG['instant_build'], $LNG['not_enough_darkmatter']);
         } else {
             return false;
         }
@@ -335,20 +336,21 @@ class ShowBuildingsPage extends AbstractGamePage
             $QueueDestroy = max(0, $QueueDestroy);
         }
 
-        $CanBuildElement = isVacationMode($USER) || $config->max_elements_build == 0 || $QueueCount < $config->max_elements_build;
+        $CanBuildElement = isVacationMode($USER) || $config->max_queue_build == 0 || $QueueCount < $config->max_queue_build;
         $CurrentMaxFields = CalculateMaxPlanetFields($PLANET);
 
         $RoomIsOk = $PLANET['field_current'] < ($CurrentMaxFields - $QueueDestroy);
 
-        $BuildEnergy = $USER[$resource[113]];
+        $BuildEnergy = $USER[$resource[ENERGY_TECH]];
         $BuildLevelFactor = 10;
         $BuildTemp = $PLANET['temp_max'];
 
         $BuildInfoList = array();
         $Elements = $reslist['allow'][$PLANET['planet_type']];
+        $this->computeResourceTable(); // needed for cost overflowtime
 
         foreach ($Elements as $Element) {
-            if (!BuildFunctions::isTechnologieAccessible($USER, $PLANET, $Element))
+            if (!BuildFunctions::isTechnologyAccessible($USER, $PLANET, $Element))
                 continue;
 
             $infoEnergy = "";
@@ -361,13 +363,13 @@ class ShowBuildingsPage extends AbstractGamePage
 
             if (in_array($Element, $reslist['prod'])) {
                 $BuildLevel = $PLANET[$resource[$Element]];
-                $Need = eval(ResourceUpdate::getProd($ProdGrid[$Element]['production'][911], $Element));
+                $Need = eval(ResourceUpdate::getProd($ProdGrid[$Element]['production'][RESS_ENGERGY], $Element));
 
                 $BuildLevel = $levelToBuild + 1;
-                $Prod = eval(ResourceUpdate::getProd($ProdGrid[$Element]['production'][911], $Element));
+                $Prod = eval(ResourceUpdate::getProd($ProdGrid[$Element]['production'][RESS_ENGERGY], $Element));
 
                 $requireEnergy = $Prod - $Need;
-                $requireEnergy = round($requireEnergy * $config->energySpeed);
+                $requireEnergy = round($requireEnergy * $config->energy_multiplier);
 
                 if ($requireEnergy < 0) {
                     $infoEnergy = sprintf($LNG['bd_need_engine'], pretty_number(abs($requireEnergy)), $LNG['tech'][RESS_ENGERGY]);
@@ -375,7 +377,6 @@ class ShowBuildingsPage extends AbstractGamePage
                     $infoEnergy = sprintf($LNG['bd_more_engine'], pretty_number(abs($requireEnergy)), $LNG['tech'][RESS_ENGERGY]);
                 }
             }
-            $this->computeResourceTable(); // needed for cost overflowtime
 
             $costResources = BuildFunctions::getElementPrice($USER, $PLANET, $Element, false, $levelToBuild + 1);
             $costOverflow = BuildFunctions::getRestPrice($USER, $PLANET, $Element, $costResources);

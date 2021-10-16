@@ -165,7 +165,6 @@ class ShowFleetAjaxPage extends AbstractGamePage
                     $this->sendData(601, $LNG['fa_planet_not_exist']);
                 }
 
-
                 $sql = "SELECT planet.id_owner as id_owner,
 		planet.galaxy as galaxy,
 		planet.system as system,
@@ -192,8 +191,7 @@ class ShowFleetAjaxPage extends AbstractGamePage
             $this->sendData(610, $LNG['fa_not_enough_probes']);
         }
 
-
-        if ($targetMission == MISSION_SPY) {
+        if (in_array($targetMission,[MISSION_SPY,MISSION_ATTACK])) {
             if (Config::get()->adm_attack == 1 && $targetData['authattack'] > $USER['authlevel']) {
                 $this->sendData(619, $LNG['fa_action_not_allowed']);
             }
@@ -212,11 +210,11 @@ class ShowFleetAjaxPage extends AbstractGamePage
 
             $IsNoobProtec = CheckNoobProtec($USER, $targetData, $targetData);
 
-            if ($IsNoobProtec['NoobPlayer']) {
+            if ($IsNoobProtec['NoobPlayer'] && !PlayerUtil::isInactive($targetData)) {
                 $this->sendData(603, $LNG['fa_week_player']);
             }
 
-            if ($IsNoobProtec['StrongPlayer']) {
+            if ($IsNoobProtec['StrongPlayer'] && !PlayerUtil::isInactive($targetData)) {
                 $this->sendData(604, $LNG['fa_strong_player']);
             }
 
@@ -247,9 +245,9 @@ class ShowFleetAjaxPage extends AbstractGamePage
         $this->returnData['slots']++;
 
         $fleetResource = array(
-            901 => 0,
-            902 => 0,
-            903 => 0,
+            RESS_METAL => 0,
+            RESS_CRYSTAL => 0,
+            RESS_DEUTERIUM => 0,
         );
 
         $fleetStartTime = $Duration + TIMESTAMP;

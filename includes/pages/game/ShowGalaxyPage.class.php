@@ -37,21 +37,21 @@ class ShowGalaxyPage extends AbstractGamePage
 		$galaxyRight	= HTTP::_GP('galaxyRight', '');
 		$systemLeft		= HTTP::_GP('systemLeft', '');
 		$systemRight	= HTTP::_GP('systemRight', '');
-		$galaxy			= min(max(HTTP::_GP('galaxy', (int) $PLANET['galaxy']), 1), $config->max_galaxy);
-		$system			= min(max(HTTP::_GP('system', (int) $PLANET['system']), 1), $config->max_system);
-		$planet			= min(max(HTTP::_GP('planet', (int) $PLANET['planet']), 1), $config->max_planets);
+		$galaxy			= min(max(HTTP::_GP('galaxy', (int) $PLANET['galaxy']), 1), $config->maximum_galaxies);
+		$system			= min(max(HTTP::_GP('system', (int) $PLANET['system']), 1), $config->maximum_systems);
+		$planet			= min(max(HTTP::_GP('planet', (int) $PLANET['planet']), 1), $config->maximum_planets);
 		$type			= HTTP::_GP('type', 1);
 		$current		= HTTP::_GP('current', 0);
 		
         if (!empty($galaxyLeft))
             $galaxy	= max($galaxy - 1, 1);
         elseif (!empty($galaxyRight))
-            $galaxy	= min($galaxy + 1, $config->max_galaxy);
+            $galaxy	= min($galaxy + 1, $config->maximum_galaxies);
 
         if (!empty($systemLeft))
             $system	= max($system - 1, 1);
         elseif (!empty($systemRight))
-            $system	= min($system + 1, $config->max_system);
+            $system	= min($system + 1, $config->maximum_systems);
 
 		if ($galaxy != $PLANET['galaxy'] || $system != $PLANET['system'])
 		{
@@ -131,9 +131,9 @@ class ShowGalaxyPage extends AbstractGamePage
 			'current_system'			=> $PLANET['system'],
 			'current_planet'			=> $PLANET['planet'],
 			'planet_type' 				=> $PLANET['planet_type'],
-            'max_planets'               => $config->max_planets,
-			'max_systems'               => $config->max_system,
-			'max_galaxies'              => $config->max_galaxy,
+            'max_planets'               => $config->maximum_planets,
+			'max_systems'               => $config->maximum_systems,
+			'max_galaxies'              => $config->maximum_galaxies,
 			'missileSelector'			=> $missileSelector,
 			'ShortStatus'				=> array(
 				'vacation'					=> $LNG['gl_short_vacation'],

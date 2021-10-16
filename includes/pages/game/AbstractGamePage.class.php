@@ -15,14 +15,8 @@
  * @link https://github.com/jkroepke/2Moons
  */
 
-abstract class AbstractGamePage
+abstract class AbstractGamePage extends AbstractPage
 {
-    /**
-     * reference of the template object
-     * @var template
-     */
-    protected $tplObj;
-
     /**
      * reference of the template object
      * @var ResourceUpdate
@@ -31,12 +25,15 @@ abstract class AbstractGamePage
     protected $window;
     protected $disableEcoSystem = false;
     protected $resourceTable;
+    protected $tplDir = 'game';
 
     protected $user;
     protected $planet;
+
     protected function __construct()
     {
         global $PLANET, $USER;
+        parent::__construct();
 
         $this->user = &$USER;
         $this->planet = &$PLANET;
@@ -44,13 +41,6 @@ abstract class AbstractGamePage
         if (!$this->disableEcoSystem) {
             $this->ecoObj = new ResourceUpdate();
             $this->ecoObj->CalcResource();
-        }
-
-        if (!AJAX_REQUEST) {
-            $this->setWindow('full');
-            $this->initTemplate();
-        } else {
-            $this->setWindow('ajax');
         }
     }
 
@@ -61,43 +51,6 @@ abstract class AbstractGamePage
         }
     }
 
-    protected function initTemplate()
-    {
-        if (isset($this->tplObj))
-            return true;
-
-        $this->tplObj = new template;
-        list($tplDir) = $this->tplObj->getTemplateDir();
-        $this->tplObj->setTemplateDir($tplDir . 'game/');
-        return true;
-    }
-
-    protected function setWindow($window)
-    {
-        $this->window = $window;
-    }
-
-    protected function getWindow()
-    {
-        return $this->window;
-    }
-
-    protected function getQueryString()
-    {
-        $queryString = array();
-        $page = HTTP::_GP('page', '');
-
-        if (!empty($page)) {
-            $queryString['page'] = $page;
-        }
-
-        $mode = HTTP::_GP('mode', '');
-        if (!empty($mode)) {
-            $queryString['mode'] = $mode;
-        }
-
-        return http_build_query($queryString);
-    }
 
     protected function getUserPlanets()
     {
@@ -171,7 +124,7 @@ abstract class AbstractGamePage
             'avatar' => $this->getUserAvatar(),
             'resourceTable' => $this->resourceTable,
             'shortlyNumber' => $themeSettings['TOPNAV_SHORTLY_NUMBER'],
-            'closed' => !Config::get()->game_disable,
+            'closed' => Config::get()->game_disable,
             'hasBoard' => filter_var(Config::get()->forum_url, FILTER_VALIDATE_URL),
             'hasAdminAccess' => !empty(Session::load()->adminAccess),
             'hasGate' => $this->planet[$resource[43]] > 0,
@@ -208,9 +161,9 @@ abstract class AbstractGamePage
             'hasAlly' => $this->user['ally_id'] != 0,
             'bodyclass' => $this->getWindow(),
             'game_name' => $config->game_name,
-            'uni_name' => $config->uni_name,
-            'ga_active' => $config->ga_active,
-            'ga_key' => $config->ga_key,
+            'uni_name' => $config->universe_name,
+            'ga_active' => $config->google_analytics_active,
+            'ga_key' => $config->google_analytics_key,
             'debug' => $config->debug,
             'VERSION' => $config->VERSION,
             'date' => explode("|", date('Y\|n\|j\|G\|i\|s\|Z', TIMESTAMP)),
@@ -224,60 +177,11 @@ abstract class AbstractGamePage
         ));
     }
 
-    protected function printMessage($message, $redirectButtons = NULL, $redirect = NULL, $fullSide = true)
-    {
-        $this->assign(array(
-            'message' => $message,
-            'redirectButtons' => $redirectButtons,
-        ));
-
-        if (isset($redirect)) {
-            $this->tplObj->gotoside($redirect[0], $redirect[1]);
-        }
-
-        if (!$fullSide) {
-            $this->setWindow('popup');
-        }
-
-        $this->display('error.default.tpl');
-    }
-
     protected function save()
     {
         if (isset($this->ecoObj)) {
             $this->ecoObj->SavePlanetToDB();
         }
-    }
-
-    protected function assign($array, $nocache = true)
-    {
-        $this->tplObj->assign_vars($array, $nocache);
-    }
-
-    protected function display($file)
-    {
-        global $THEME, $LNG;
-
-        $this->save();
-
-        if ($this->getWindow() !== 'ajax') {
-            $this->getPageData();
-        }
-
-        $this->assign(array(
-            'lang' => $LNG->getLanguage(),
-            'dpath' => $THEME->getTheme(),
-            'scripts' => $this->tplObj->jsscript,
-            'execscript' => implode("\n", $this->tplObj->script),
-            'basepath' => PROTOCOL . HTTP_HOST . HTTP_BASE,
-        ));
-
-        $this->assign(array(
-            'LNG' => $LNG,
-        ), false);
-
-        $this->tplObj->display('extends:layout.' . $this->getWindow() . '.tpl|' . $file);
-        exit;
     }
 
     protected function sendJSON($data)

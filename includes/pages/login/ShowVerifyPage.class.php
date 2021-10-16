@@ -58,7 +58,7 @@ class ShowVertifyPage extends AbstractLoginPage
 
 		list($userID, $planetID) = PlayerUtil::createPlayer($userData['universe'], $userData['userName'], $userData['password'], $userData['email'], $userData['language']);
 
-		if($config->mail_active == 1)
+		if($config->mail_active)
 		{
 			require('includes/classes/Mail.class.php');
 			$MailSubject	= sprintf($LNG['registerMailCompleteTitle'], $config->game_name, Universe::current());
@@ -69,8 +69,8 @@ class ShowVertifyPage extends AbstractLoginPage
 				'{GAMEMAIL}',
 			), array(
 				$userData['userName'],
-				$config->game_name.' - '.$config->uni_name,
-				$config->smtp_sendmail,
+				$config->game_name.' - '.$config->universe_name,
+				$config->mail_sender,
 			), $MailRAW);
 
 			try {

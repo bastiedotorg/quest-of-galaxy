@@ -312,14 +312,14 @@ class ShowFleetStep3Page extends AbstractGamePage
 
             $IsNoobProtec = CheckNoobProtec($USER, $targetPlayerData, $targetPlayerData);
 
-            if ($IsNoobProtec['NoobPlayer']) {
+            if ($IsNoobProtec['NoobPlayer'] && !PlayerUtil::isInactive($targetPlayerData)) {
                 $this->printMessage($LNG['fl_player_is_noob'], array(array(
                     'label' => $LNG['sys_back'],
                     'url' => 'game.php?page=fleetTable'
                 )));
             }
 
-            if ($IsNoobProtec['StrongPlayer']) {
+            if ($IsNoobProtec['StrongPlayer'] && !PlayerUtil::isInactive($targetPlayerData)) {
                 $this->printMessage($LNG['fl_player_is_strong'], array(array(
                     'label' => $LNG['sys_back'],
                     'url' => 'game.php?page=fleetTable'
