@@ -9,7 +9,7 @@
             href="./styles/resource/admin/images/favicon.svg"
             type="image/x-icon"
     />
-    <title>{$adm_cp_title} &bull; {$game_name}</title>
+    <title>{$LNG.adm_cp_title} &bull; {$game_name}</title>
 
     <!-- ========== All CSS files linkup ========= -->
     <link rel="stylesheet" type="text/css" href="./styles/resource/admin/css/bootstrap.min.css?">
@@ -68,7 +68,7 @@
     <!-- ========== section start ========== -->
     <section class="section">
         <div class="container-fluid">
-
+{block name="content"}{/block}
         </div>
         <!-- end container -->
     </section>

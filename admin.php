@@ -19,13 +19,11 @@ define('MODE', 'ADMIN');
 define('DATABASE_VERSION', 'OLD');
 
 define('ROOT_PATH', str_replace('\\', '/', dirname(__FILE__)) . '/');
-set_include_path(ROOT_PATH . 'includes/libs/BBCodeParser2/' . ':' . ROOT_PATH . ':' . get_include_path());
-require_once('HTML/BBCodeParser2.php');
 
-require 'includes/pages/game/AbstractGamePage.class.php';
-require 'includes/pages/game/ShowErrorPage.class.php';
 require 'includes/common.php';
 require 'includes/classes/Log.class.php';
+
+require 'includes/pages/adm/AbstractAdminPage.php';
 
 if ($USER['authlevel'] == AUTH_USR) {
     HTTP::redirectTo('game.php');
@@ -63,8 +61,9 @@ switch ($page) {
         ShowConfigBasicPage();
         break;
     case 'configuni':
-        include_once('includes/pages/adm/ShowConfigUniPage.php');
-        ShowConfigUniPage();
+        include_once('includes/pages/adm/ShowConfigUniversePage.php');
+        $p = new ShowConfigUniversePage();
+        $p->show();
         break;
     case 'chat':
         include_once('includes/pages/adm/ShowChatConfigPage.php');
@@ -206,6 +205,7 @@ switch ($page) {
         break;
     default:
         include_once('includes/pages/adm/ShowIndexPage.php');
-        ShowIndexPage();
+        $app = new ShowIndexPage();
+        $app->show();
         break;
 }

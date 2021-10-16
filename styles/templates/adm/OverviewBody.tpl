@@ -1,33 +1,26 @@
-{include file="overall_header.tpl"}
-<h1>{$LNG.ow_title}</h1>
-{foreach item=Message from=$Messages}
-    <div class="alert alert-info">{$Message}</div>
-{/foreach}
-
-<h2>{$LNG.ow_overview}</h2>
-<p>{$LNG.ow_welcome_text}</p>
-<a class="float-end btn btn-primary" href="https://github.com/bastiedotorg/quest-of-galaxy/" target="_blank">Project Homepage</a>
-
-<h3>{$LNG.ow_updates}</h3>
-<div id="feed"></div>
-
-<hr/>
-<h3>{$LNG.ow_credits}</h3>
-<h4>{$LNG.ow_proyect_leader}: <a target="_blank" href="https://github.com/bastiedotorg">Bastian</a></h4>
-
-<h4>Original {$LNG.ow_proyect_leader}: <a target="_blank" href="https://github.com/jkroepke">Jan</a></h4>
-<table>
-    <tr>
-        <td><p>&nbsp;</p>
-            <h3>{$LNG.ow_translator}</h3></td>
-    </tr>
-    <tr>
-        <td>
-            <table>
+{block name="content"}
+    <h1>{$LNG.ow_title}</h1>
+    {foreach item=Message from=$Messages}
+        <div class="alert alert-info">{$Message}</div>
+    {/foreach}
+    <h2>{$LNG.ow_overview}</h2>
+    <p>{$LNG.ow_welcome_text}</p>
+    <a class="float-end btn btn-primary" href="https://github.com/bastiedotorg/quest-of-galaxy/" target="_blank">Project
+        Homepage</a>
+    <h3>{$LNG.ow_updates}</h3>
+    <div id="feed"></div>
+    <hr/>
+    <h3>{$LNG.ow_credits}</h3>
+    <h4>{$LNG.ow_proyect_leader}: <a target="_blank" href="https://github.com/bastiedotorg">Bastian</a></h4>
+    <h4>Original {$LNG.ow_proyect_leader}: <a target="_blank" href="https://github.com/jkroepke">Jan</a></h4>
+    <hr/>
+    <div class="row">
+        <div class="col-12 col-xl-6">
+            <h3>{$LNG.ow_translator}</h3>
+            <table class="table table-striped">
                 <tr>
                     <td>
-                        <img src="styles/resource/images/login/flags/us.png" alt="(english)">
-                    </td>
+                        <img src="styles/resource/images/login/flags/us.png" alt="(english)"></td>
                     <td>
                         QwataKayean
                     </td>
@@ -73,20 +66,13 @@
                     </td>
                 </tr>
             </table>
-        </td>
-    </tr>
-</table>
-<table>
-    <tr>
-        <td><p>&nbsp;</p>
-            <h3>{$LNG.ow_special_thanks}</h3></td>
-    </tr>
-    <tr>
-        <td>
-            <table>
+        </div>
+        <div class="col-12 col-xl-6">
+            <h3>{$LNG.ow_special_thanks}</h3>
+            <table class="table table-striped">
                 <tr>
                     <td><a href="https://github.com/Hilarious001"
-                                                    target="_blank">Hilarious001</a></td>
+                           target="_blank">Hilarious001</a></td>
                     <td>Ralf M.</td>
                     <td>InquisitorEA</td>
                 </tr>
@@ -114,24 +100,21 @@
                     <td>scrippi</td>
                 </tr>
             </table>
-        </td>
-    </tr>
-</table>
+        </div>
+    </div>
+    <script type="text/javascript" src="http://www.google.com/jsapi"></script>
+    <script type="text/javascript">
+        google.load("feeds", "1");
+        google.setOnLoadCallback(initialize);
 
-<script type="text/javascript" src="http://www.google.com/jsapi"></script>
-<script type="text/javascript">
-    google.load("feeds", "1");
-    google.setOnLoadCallback(initialize);
-
-    function initialize() {
-        var feedControl = new google.feeds.FeedControl();
-        feedControl.addFeed("https://github.com/jkroepke/2Moons/commits/master.atom", "");
-        //feedControl.addFeed("http://code.google.com/feeds/p/2moons/svnchanges/basic", "");
-        feedControl.draw(document.getElementById("feed"));
-        //var feedControl = new google.feeds.FeedControl();
-        //feedControl.addFeed("https://www.facebook.com/feeds/page.php?id=129282307106646&format=rss20", "");
-        //feedControl.draw(document.getElementById("news"));
-    }
-</script>
-
-{include file="overall_footer.tpl"}
+        function initialize() {
+            var feedControl = new google.feeds.FeedControl();
+            feedControl.addFeed("https://github.com/jkroepke/2Moons/commits/master.atom", "");
+            //feedControl.addFeed("http://code.google.com/feeds/p/2moons/svnchanges/basic", "");
+            feedControl.draw(document.getElementById("feed"));
+            //var feedControl = new google.feeds.FeedControl();
+            //feedControl.addFeed("https://www.facebook.com/feeds/page.php?id=129282307106646&format=rss20", "");
+            //feedControl.draw(document.getElementById("news"));
+        }
+    </script>
+{/block}

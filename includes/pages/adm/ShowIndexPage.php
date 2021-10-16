@@ -1,7 +1,7 @@
 <?php
 
 /**
- *  2Moons 
+ *  2Moons
  *   by Jan-Otto Kröpke 2009-2016
  *
  * For the full copyright and license information, please view the LICENSE
@@ -15,15 +15,13 @@
  * @link https://github.com/jkroepke/2Moons
  */
 
-function ShowIndexPage()
+class ShowIndexPage extends AbstractAdminPage
 {
-	global $LNG;
-	$template	= new template();
+    public function show()
+    {
+        global $LNG;
 
-	$template->assign_vars(array(	
-		'game_name'		=> Config::get()->game_name,
-		'adm_cp_title'	=> $LNG['adm_cp_title'],
-	));
-	
-	$template->display('adm/ShowIndexPage.tpl');
+
+        $this->display('OverviewBody.tpl');
+    }
 }
