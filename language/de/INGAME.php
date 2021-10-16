@@ -63,7 +63,7 @@ $LNG['tn_delete_mode']						= 'Ihr Account wird am %s automatisch gelöscht!';
 
 //----------------------------------------------------------------------------//
 //LEFT MENU
-$LNG['lm_overview']						= 'Übersicht';
+$LNG['lm_overview']						= 'Planetenübersicht';
 $LNG['lm_galaxy']						= 'Galaxie';
 $LNG['lm_empire']						= 'Imperium';
 $LNG['lm_fleet']						= 'Flotte';
@@ -1382,3 +1382,6 @@ $LNG['fl_capacity_fuel'] = 'Treibstoff';
 $LNG['fleetDealer_info'] = 'Hier kannst du deine alten Schiffe beim Schrotthändler gegen Rohstoffe tauschen.';
 
 $LNG['storage_too_small'] = 'Speicher zu klein!';
+
+$LNG['not_enough_darkmatter'] = 'Nicht genügend dunkle Materie!';
+$LNG['instant_build'] = 'Sofortbau';

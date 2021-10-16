@@ -59,7 +59,7 @@
                                             <li class="list-group-item" onclick="return Dialog.info({$ResType});"
                                                 data-bs-toggle="tooltip" data-bs-placement="top"
                                                 title="{$LNG.tech.{$ResType}}: {$LNG.shortDescription.$ResType}">{$LNG.tech.{$ResType}}
-                                                : <span style="font-weight:700">{$ResCount|number}</span></li>
+                                                : <span style="font-weight:700">{$ResCount|number}</span><br />{if $Element.costOverflowTime[$ResType] == -1}{$LNG.storage_too_small}{else}<small>({date($LNG.php_tdformat, $Element.costOverflowTime[$ResType])})</small>{/if}</li>
                                         {/if}
                                     {/foreach}
                                 </ul>

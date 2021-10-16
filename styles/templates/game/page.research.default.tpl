@@ -38,7 +38,7 @@
                                         <li class="list-group-item" onclick="return Dialog.info({$ResType});"
                                             data-bs-toggle="tooltip" data-bs-placement="top"
                                             title="{$LNG.tech.{$ResType}}: {$LNG.shortDescription.$ResType}">{$LNG.tech.{$ResType}}</a>
-                                            : <span style="font-weight:700">{$ResCount|number}</span></li>
+                                            : <span style="font-weight:700">{$ResCount|number}</span><br />{if $Element.costOverflowTime[$ResType] == -1}{$LNG.storage_too_small}{else}<small>({date($LNG.php_tdformat, $Element.costOverflowTime[$ResType])})</small>{/if}</li>
                                     {/if}
                                 {/foreach}
                             </ul>
@@ -50,8 +50,7 @@
                                 <li class="list-group-item" onclick="return Dialog.info({$RessID});"
                                     data-bs-toggle="tooltip"
                                     title="{$LNG.tech.{$RessID}}: {$LNG.shortDescription.$RessID}">{$LNG.tech.{$RessID}}</a>
-                                    <strong><span
-                                                style="color:{if $Element.costOverflow[$RessID] == 0}darkgreen{else}darkred{/if}">{$RessAmount|number}</span></strong>
+                                    <strong><span style="color:{if $Element.costOverflow[$RessID] == 0}darkgreen{else}darkred{/if}">{$RessAmount|number}</span></strong>
                                 </li>
                             {/foreach}
                             {if !empty($Element.infoEnergy)}

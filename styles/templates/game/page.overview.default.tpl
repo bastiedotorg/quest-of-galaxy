@@ -13,6 +13,15 @@
                     {$LNG.ov_players} {$LNG.ov_online}: {$usersOnline}<br/>
                     {$LNG.ov_moving_fleets}: {$fleetsOnline}<br/>
                     {$LNG.ov_points}: {$rankInfo}<br/>
+                    {if $noob.active}
+                        {$LNG.noob_protection}:
+                        {if $noob.points < $noob.limit}
+                            {sprintf($LNG.noob_active_until, $noob.points)}
+                        {else}
+                            {sprintf($LNG.noob_inactive, $noob.lower_limit, $noob.upper_limit)}
+                        {/if}<br />
+                    {/if}
+                    {$LNG.ov_planet_colonization}: {$USER.current_planet_count} / {$planets_max}<br />
                     {if $is_news}
                         <div class="collapse" id="news">
                             {$LNG.ov_news}:&nbsp;{$news}
@@ -51,8 +60,8 @@
                             {foreach $defMissiles as $ID => $amount}
                                 {if $amount > 0}
                                     <li class="list-group-item d-flex justify-content-between align-items-center"><span
-                                                class="badge bg-info rounded-pill">{$amount|number}</span> <a href="#"
-                                                                                                              onclick="return Dialog.info({$ID});">{$LNG.tech.{$ID}}</a>
+                                                class="badge bg-info rounded-pill">{$amount|number}</span>
+                                        <a href="#" onclick="return Dialog.info({$ID});">{$LNG.tech.{$ID}}</a>
                                     </li>
                                 {/if}
                             {/foreach}
@@ -79,12 +88,12 @@
                         <a class="btn btn-secondary" onclick="return Dialog.PlanetAction();"
                            title="{$LNG.ov_planetmenu}"><i class="fas fa-edit"></i></a>
                     </div>
-                    <h2>{$LNG["type_planet_{$planet_type}"]} {$planetname}</h2>
+                    <h2>{$LNG["type_planet_{$PLANET.planet_type}"]} {$PLANET.name}</h2>
                 </div>
                 <div class="card-body d-flex">
                     <div class="d-inline-block">
-                        <img style="float: left;" src="{$dpath}planeten/{$planetimage}.jpg" height="200" width="200"
-                             alt="{$planetname}">
+                        <img style="float: left;" src="{$dpath}planeten/{$PLANET.image}.jpg" height="200" width="200"
+                             alt="{$PLANET.name}">
                     </div>
                     <div class="d-inline-block ps-1 flex-grow-1">
                         <ul class="list-group">
@@ -120,22 +129,19 @@
                                             href="game.php?page=shipyard&amp;mode=fleet">{$LNG.lm_shipshard}
                                         : {$LNG.ov_free}</a></li>
                             {/if}
-                            <li class="list-group-item {if $planet_coins > 0}list-group-item-danger{/if}">{$LNG.cuneros_coins}
-                                : <span class="info-coins">{$planet_coins|number_format}</span>{if $planet_coins > 0}<a
+                            <li class="list-group-item {if $PLANET.coins > 0}list-group-item-danger{/if}">{$LNG.cuneros_coins}
+                                : <span class="info-coins">{$PLANET.coins|number_format}</span>{if $PLANET.coins > 0}<a
                                         class="btn btn-primary btn-sm float-end json-request" data-value="0" data-target=".info-coins"
                                         data-href="game.php?page=overview&amp;mode=claim_coins">{$LNG.cuneros_claim}</a>{/if}
                             </li>
                         </ul>
                         <br>
-                        {$LNG.ov_diameter}: {$planet_diameter} {$LNG.ov_distance_unit} (<a
-                                title="{$LNG.ov_developed_fields}">{$planet_field_current}</a> / <a
-                                title="{$LNG.ov_max_developed_fields}">{$planet_field_max}</a> {$LNG.ov_fields})
+                        {$LNG.ov_diameter}: {$PLANET.diameter} {$LNG.ov_distance_unit} (<a
+                                title="{$LNG.ov_developed_fields}">{$PLANET.field_current}</a> / <a
+                                title="{$LNG.ov_max_developed_fields}">{$PLANET.field_max}</a> {$LNG.ov_fields})
                         <br>{$LNG.ov_temperature}
-                        : {$LNG.ov_aprox} {$planet_temp_min}{$LNG.ov_temp_unit} {$LNG.ov_to} {$planet_temp_max}{$LNG.ov_temp_unit}
-                        <br>{$LNG.ov_position}: <a
-                                href="game.php?page=galaxy&amp;galaxy={$galaxy}&amp;system={$system}">[{$galaxy}
-                            :{$system}
-                            :{$planet}]</a>
+                        : {$LNG.ov_aprox} {$PLANET.temp_min}{$LNG.ov_temp_unit} {$LNG.ov_to} {$PLANET.temp_max}{$LNG.ov_temp_unit}
+                        <br>{$LNG.ov_position}: {BuildPlanetAddressLink($PLANET)}
 
                     </div>
                 </div>
@@ -163,7 +169,6 @@
                     </div>
                     <div class="card-body row">
                         {foreach $AllPlanets as $PlanetRow}
-                            {if ($PlanetRow@iteration % $themeSettings.PLANET_ROWS_ON_OVERVIEW) === 1}{/if}
                             <div class="col">
                                 <a href="game.php?page=overview&amp;cp={$PlanetRow.id}" title="{$PlanetRow.name}">
                                     <img src="{$dpath}planeten/{$PlanetRow.image}.jpg" width="100" height="100"

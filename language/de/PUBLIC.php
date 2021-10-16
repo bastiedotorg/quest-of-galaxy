@@ -112,7 +112,7 @@ $LNG['vertifyAdminMessage']			= 'Der Username "%s" wurder aktiviert!';
 
 
 //lostpassword
-$LNG['passwordInfo']				= 'Wenn du dein Kennwort vergessen hast, musst du den Benutzernamen und die E-Mail-Adresse angeben, die du in deinem Profil hinterlegt hast. Wenn du die Daten nicht mehr weißt, wende dich an den Gameadministrator.';
+$LNG['passwordInfo']				= 'Wenn du dein Kennwort vergessen hast, musst du den Benutzernamen und die E-Mail-Adresse angeben, die du in deinem Profil hinterlegt hast. Wenn du die Daten nicht mehr weißt, wende dich an den Administrator.';
 $LNG['passwordUsername']			= 'Benutzernamen';
 $LNG['passwordMail']				= 'E-Mail';
 $LNG['passwordCaptcha']				= 'Sicherheitscode';
