@@ -1380,3 +1380,15 @@ INSERT INTO `%PREFIX%statistics` (`id`, `stat_key`, `stat_value`) VALUES (NULL, 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+
+create table `%PREFIX%configuration`
+(
+    id int auto_increment
+        primary key,
+    universe_id int null,
+    config_type varchar(25) null,
+    config_value text null,
+    config_key varchar(55) null,
+    constraint uni1_configuration_config_key_universe_id_uindex
+        unique (config_key, universe_id)
+);
