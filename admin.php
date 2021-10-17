@@ -61,9 +61,10 @@ switch ($page) {
         ShowConfigBasicPage();
         break;
     case 'configuni':
+    case 'configUniverse':
         include_once('includes/pages/adm/ShowConfigUniversePage.php');
         $p = new ShowConfigUniversePage();
-        $p->show();
+        $p->dispatch();
         break;
     case 'chat':
         include_once('includes/pages/adm/ShowChatConfigPage.php');

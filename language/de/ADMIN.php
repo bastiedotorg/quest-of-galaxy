@@ -1349,3 +1349,214 @@ $LNG['se_server_settings'] = [
     'mail_smtp_port' => 'SMTP Port',
     'mail_smtp_username' => 'SMTP Nutzername', 'mail_smtp_password' => 'SMTP Passwort',
     'google_analytics_active' => 'Google Analytics aktivieren', 'google_analytics_key' => 'Google Analytics Key'];
+
+
+$LNG['config_labels'] = [
+    'game_speed' => 'Spielgeschwindigkeit',
+    'fleet_speed' => 'Flottengeschwindigkeit',
+    'resource_multiplier' => 'Rohstoffmultiplikator',
+    'storage_multiplier' => 'Speichermultiplikator',
+    'energy_multiplier' => 'Energiemultiplikator',
+    'halt_speed' => 'Wartegeschwindigkeit',
+    'debris_fleet' => 'Flotte ins Trümmerfeld',
+    'debris_defensive' => 'Defensive ins Trümmerfeld',
+    'initial_fields' => 'Felder Heimatplanet',
+    'universe_name' => 'Universum-Name',
+    'universe_active' => 'Universum aktiv',
+    'registration_closed' => 'Registrierung schließen',
+    'close_reason' => 'Schließ-Grund',
+    'forum_url' => 'Foren-URL',
+
+    'referral_active' => 'Referral-System Aktiv',
+    'referral_earn' => 'Referral-Verdienst (Coins)',
+    'referral_bonus' => 'Referral-Verdienst (Dunkle Materie)',
+    'referral_min_points' => 'Referral-Punkte für Dunkle Materie',
+    'referral_max_referrals' => 'Maximale Anzahl Referrals',
+
+    'metal_basic_income' => 'Grundeinkommen Metall',
+    'crystal_basic_income' => 'Grundeinkommen Kristall',
+    'deuterium_basic_income' => 'Grundeinkommen Deuterium',
+    'energy_basic_income' => 'Grundeinkommen Energie',
+
+    'metal_start' => 'Startspeicher Metall',
+    'crystal_start' => 'Startspeicher Kristall',
+    'deuterium_start' => 'Startspeicher Deuterium',
+    'darkmatter_start' => 'Startspeicher Dunkle Materie',
+
+    'noob_protection_active' => 'Anfängerschutz aktiv',
+    'noob_protection_points' => 'Anfängerschutz bis Punkte',
+    'noob_protection_multiplier' => 'Maximaler Punkteunterschied',
+
+    'bash_protection_active' => 'Bash-Schutz aktiv',
+    'bash_protection_number' => 'Max. Angriffe',
+    'bash_protection_time' => 'Bash-Zeitraum',
+
+    'admin_attack' => 'Admins angreifbar',
+    'debug' => 'Debug Mode',
+    'language' => 'Standardsprache',
+
+    'news_active' => 'Newsmeldung aktiv',
+    'news_text' => 'News-Text',
+
+    'minimum_build_time' => 'Minimale Bauzeit',
+    'modules' => 'Aktive Module',
+
+    'trade_allowed_ships' => 'Erlaubte Schifftypen Schrotthändler',
+    'trade_charge' => 'Freier Händler Gebühr (DM)',
+
+    'maximum_galaxies' => 'Maximale Galaxien',
+    'maximum_systems' => 'Maximale Systeme',
+    'maximum_planets' => 'Maximale Planeten',
+
+    'planet_initial_fields' => 'Felder Heimatplanet',
+    'planet_size_factor' => 'Planetenfaktor',
+
+    'max_queue_build' => 'Gebäude-Bauschleife',
+    'max_queue_tech' => 'Forschungswarteschlange',
+    'max_queue_ships' => 'Schiff-Bauschleife',
+
+    'min_player_planets' => 'Mindestplaneten pro Spieler',
+
+    'max_planets_tech' => 'Maximale Planetenslots durch Forschung',
+    'planets_per_tech' => 'Faktor Astrophysik:Planeten',
+
+    'max_planets_officer' => 'Maximale Planetenslots durch Offiziere',
+
+    'max_fleet_per_build' => 'Maximaler Flottenbau pro Auftrag',
+
+    'deuterium_cost_galaxy' => 'Deuterium für Erkundung',
+
+    'max_darkmatter_missions' => 'Max. DM Missionen',
+
+    'max_resources_overflow' => 'Resourcen Overflow',
+
+    'moon_size_factor' => 'Mondgrößen-Faktor',
+    'moon_chance' => 'Maximale Mondwahrscheinlichkeit',
+
+    'trader_darkmatter_cost' => 'Kosten freier Händler',
+    'research_factor' => 'Forschungs-Faktor',
+
+    'max_fleet_per_acs' => 'Maximale Flotten pro AKS',
+    'delete_debris_with_moon' => 'Trümmerfeld bei Mondentstehung löschen',
+
+    'vacation_mode_minimum' => 'Mindestdauer Urlaubsmodus',
+    'gate_wait_time' => 'Wartezeit Stargate',
+
+    'silo_factor' => 'Raketensilo-Faktor',
+
+    'timezone' => 'Standard-Zeitzone',
+    'daylight_savings_time' => 'Sommerzeit aktiv',
+
+    'coinpot_start' => 'Startwert Coin-pott',
+    'coinpot_increase' => 'Coin-pott Erhöhung bei DM Kauf',
+    'coinpot_wait_minutes' => 'Mindestwartezeit Coin-pott',
+    'coinpot_random_minutes' => 'Zufallszeit Coin-Pott',
+
+];
+
+$LNG['config_help'] = [
+    'game_speed' => 'Spielgeschwindigkeit',
+    'fleet_speed' => 'Flottengeschwindigkeit',
+    'resource_multiplier' => 'Rohstoffmultiplikator',
+    'storage_multiplier' => 'Speichermultiplikator',
+    'energy_multiplier' => 'Energiemultiplikator',
+    'halt_speed' => 'Wartegeschwindigkeit',
+    'debris_fleet' => 'Flotte ins Trümmerfeld',
+    'debris_defensive' => 'Defensive ins Trümmerfeld',
+    'initial_fields' => 'Felder Heimatplanet',
+    'universe_name' => 'Universum-Name',
+    'universe_active' => 'Universum aktiv',
+    'registration_closed' => 'Registrierung schließen',
+    'close_reason' => 'Schließ-Grund',
+    'forum_url' => 'Foren-URL',
+
+    'referral_active' => 'Referral-System Aktiv',
+    'referral_earn' => 'Referral-Verdienst (Coins)',
+    'referral_bonus' => 'Referral-Verdienst (Dunkle Materie)',
+    'referral_min_points' => 'Referral-Punkte für Dunkle Materie',
+    'referral_max_referrals' => 'Maximale Anzahl Referrals',
+
+    'metal_basic_income' => 'Grundeinkommen Metall',
+    'crystal_basic_income' => 'Grundeinkommen Kristall',
+    'deuterium_basic_income' => 'Grundeinkommen Deuterium',
+    'energy_basic_income' => 'Grundeinkommen Energie',
+
+    'metal_start' => 'Startspeicher Metall',
+    'crystal_start' => 'Startspeicher Kristall',
+    'deuterium_start' => 'Startspeicher Deuterium',
+    'darkmatter_start' => 'Startspeicher Dunkle Materie',
+
+    'noob_protection_active' => 'Anfängerschutz aktiv',
+    'noob_protection_points' => 'Anfängerschutz bis Punkte',
+    'noob_protection_multiplier' => 'Maximaler Punkteunterschied',
+
+    'bash_protection_active' => 'Bash-Schutz aktiv',
+    'bash_protection_number' => 'Max. Angriffe',
+    'bash_protection_time' => 'Bash-Zeitraum',
+
+    'admin_attack' => 'Admins angreifbar',
+    'debug' => 'Debug Mode',
+    'language' => 'Standardsprache',
+
+    'news_active' => 'Newsmeldung aktiv',
+    'news_text' => 'News-Text',
+
+    'minimum_build_time' => 'Minimale Bauzeit',
+    'modules' => 'Aktive Module',
+
+    'trade_allowed_ships' => 'Erlaubte Schifftypen Schrotthändler',
+    'trade_charge' => 'Freier Händler Gebühr (DM)',
+
+    'maximum_galaxies' => 'Maximale Galaxien',
+    'maximum_systems' => 'Maximale Systeme',
+    'maximum_planets' => 'Maximale Planeten',
+
+    'planet_initial_fields' => 'Felder Heimatplanet',
+    'planet_size_factor' => 'Planetenfaktor',
+
+    'max_queue_build' => 'Gebäude-Bauschleife',
+    'max_queue_tech' => 'Forschungswarteschlange',
+    'max_queue_ships' => 'Schiff-Bauschleife',
+
+    'min_player_planets' => 'Mindestplaneten pro Spieler',
+
+    'max_planets_tech' => 'Maximale Planetenslots durch Forschung',
+    'planets_per_tech' => 'Faktor Astrophysik:Planeten',
+
+    'max_planets_officer' => 'Maximale Planetenslots durch Offiziere',
+
+    'max_fleet_per_build' => 'Maximaler Flottenbau pro Auftrag',
+
+    'deuterium_cost_galaxy' => 'Deuterium für Erkundung',
+
+    'max_darkmatter_missions' => 'Max. DM Missionen',
+
+    'max_resources_overflow' => 'Resourcen Overflow',
+
+    'moon_size_factor' => 'Mondgrößen-Faktor',
+    'moon_chance' => 'Maximale Mondwahrscheinlichkeit',
+
+    'trader_darkmatter_cost' => 'Kosten freier Händler',
+    'research_factor' => 'Forschungs-Faktor',
+
+    'max_fleet_per_acs' => 'Maximale Flotten pro AKS',
+    'delete_debris_with_moon' => 'Trümmerfeld bei Mondentstehung löschen',
+
+    'vacation_mode_minimum' => 'Mindestdauer Urlaubsmodus',
+    'gate_wait_time' => 'Wartezeit Stargate',
+
+    'silo_factor' => 'Raketensilo-Faktor',
+
+    'timezone' => 'Standard-Zeitzone',
+    'daylight_savings_time' => 'Sommerzeit aktiv',
+
+    'coinpot_start' => 'Startwert Coin-pott',
+    'coinpot_increase' => 'Coin-pott Erhöhung bei DM Kauf',
+    'coinpot_wait_minutes' => 'Mindestwartezeit Coin-pott',
+    'coinpot_random_minutes' => 'Zufallszeit Coin-Pott',
+
+];
+
+
+$LNG['btn_save'] = 'Speichern';
+$LNG['config_saved'] = 'Konfiguration gespeichert!';
