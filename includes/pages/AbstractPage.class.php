@@ -36,6 +36,12 @@ class AbstractPage
         }
 
     }
+    protected function sendJSON($data)
+    {
+        $this->save();
+        echo json_encode($data);
+        exit;
+    }
 
     protected function baseAssign() {
 
@@ -160,6 +166,7 @@ class AbstractPage
             'scripts' => $this->tplObj->jsscript,
             'execscript' => implode("\n", $this->tplObj->script),
             'basepath' => PROTOCOL . HTTP_HOST . HTTP_BASE,
+            'universeId' => Universe::current(),
         ));
 
         $this->assign(array(
@@ -168,6 +175,14 @@ class AbstractPage
 
         $this->tplObj->display('extends:layout.' . $this->getWindow() . '.tpl|' . $file);
         exit;
+    }
+
+    public function dispatch() {
+        if($_SERVER['REQUEST_METHOD'] == 'POST') {
+            $this->post();
+        } else if($_SERVER['REQUEST_METHOD'] === 'GET') {
+            $this->get();
+        }
     }
 
 }

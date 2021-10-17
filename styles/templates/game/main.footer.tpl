@@ -12,6 +12,7 @@
 	})();
 </script>
 {/if}
+<script src="./scripts/base/notifybox.js"></script>
 <script src="./styles/resource/bootstrap/js/bootstrap.bundle.min.js" integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous"></script>
 <script>
 	document.querySelectorAll("a").forEach(function(item) {

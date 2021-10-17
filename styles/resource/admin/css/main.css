@@ -875,7 +875,6 @@ h6,
 
 /* =========== tables css =========== */
 .table > :not(caption) > * > * {
-  padding: 15px 0;
   border-bottom-color: #efefef;
   vertical-align: middle; }
 

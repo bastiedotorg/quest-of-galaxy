@@ -184,13 +184,6 @@ abstract class AbstractGamePage extends AbstractPage
         }
     }
 
-    protected function sendJSON($data)
-    {
-        $this->save();
-        echo json_encode($data);
-        exit;
-    }
-
     protected function redirectTo($url)
     {
         $this->save();

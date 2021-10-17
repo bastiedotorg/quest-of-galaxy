@@ -44,20 +44,7 @@
             <div class="row">
                 <div class="col-lg-5 col-md-5 col-6">
                     <div class="header-left d-flex align-items-center">
-                        <div class="menu-toggle-btn mr-20">
-                            <button
-                                    id="menu-toggle"
-                                    class="main-btn primary-btn btn-hover"
-                            >
-                                <i class="lni lni-chevron-left me-2"></i> Menu
-                            </button>
-                        </div>
-                        <div class="header-search d-none d-md-flex">
-                            <form action="#">
-                                <input type="text" placeholder="Search..."/>
-                                <button><i class="lni lni-search-alt"></i></button>
-                            </form>
-                        </div>
+
                     </div>
                 </div>
             </div>
@@ -68,7 +55,17 @@
     <!-- ========== section start ========== -->
     <section class="section">
         <div class="container-fluid">
-{block name="content"}{/block}
+            <div class="toast-container fixed-top top-3 end-0 p-3" id="toastContainer">
+                <div role="alert" aria-live="assertive" aria-atomic="true" class="d-none toast" data-bs-autohide="true" id="toastNotify">
+                    <div class="toast-header d-none">
+                        <strong class="me-auto toast-title"></strong>
+                    </div>
+                    <div class="toast-body">
+                    </div>
+                </div>
+            </div>
+
+            {block name="content"}{/block}
         </div>
         <!-- end container -->
     </section>
@@ -109,6 +106,7 @@
 
 <!-- ========= All Javascript files linkup ======== -->
 <script src="./styles/resource/admin/js/bootstrap.bundle.min.js"></script>
+<script src="./scripts/base/notifybox.js"></script>
 
 </body>
 </html>

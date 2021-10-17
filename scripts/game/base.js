@@ -197,34 +197,6 @@ var Dialog	= {
 	}
 }
 
-function NotifyBox(text, color=null) {
-
-	let toast = document.getElementById("toastNotify").cloneNode(true);
-	toast.classList.remove("d-none");
-	toast.removeAttribute("id");
-
-	if(color) {
-		toast.classList.add("text-white","bg-gradient","bg-"+color);
-	}
-
-	toast.querySelector(".toast-body").innerHTML = text;
-
-	document.querySelector("#toastContainer").appendChild(toast);
-
-	let toastBs = new bootstrap.Toast(toast);
-	toastBs.show();
-	window.setTimeout(function() {
-		document.querySelector("#toastContainer").removeChild(toast);
-	}, 10000);
-/*
-	tip = $('#tooltip')
-	tip.html(text).addClass('notify').css({
-		left : (($(window).width() - $('#leftmenu').width()) / 2 - tip.outerWidth() / 2) + $('#leftmenu').width(),
-	}).show();
-	window.setTimeout(function(){tip.fadeOut(1000, function() {tip.removeClass('notify')})}, 500);*/
-}
-
-
 function UhrzeitAnzeigen() {
    $(".servertime").text(getFormatedDate(serverTime.getTime(), tdformat));
 }

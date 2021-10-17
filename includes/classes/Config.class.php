@@ -17,7 +17,6 @@
 class Config
 {
     private static $universeConfigItems = [
-        'users_amount' => ["default" => 0, "type" => 'integer'],
         'game_speed' => ["default" => 2500, "type" => 'integer'],
         'fleet_speed' => ["default" => 2500, "type" => 'float'],
         'resource_multiplier' => ["default" => 1, "type" => 'float'],
@@ -49,10 +48,6 @@ class Config
         'deuterium_start' => ["default" => 0, "type" => 'integer'],
         'darkmatter_start' => ["default" => 0, "type" => 'integer'],
 
-        'latest_galaxy_position' => ["default" => 1, "type" => 'integer'],
-        'latest_system_position' => ["default" => 1, "type" => 'integer'],
-        'latest_planet_position' => ["default" => 1, "type" => 'integer'],
-
         'noob_protection_active' => ["default" => true, "type" => 'boolean'],
         'noob_protection_points' => ["default" => 5000, "type" => 'integer'],
         'noob_protection_multiplier' => ["default" => 5.0, "type" => 'float'],
@@ -64,16 +59,6 @@ class Config
         'admin_attack' => ["default" => false, "type" => 'boolean'],
         'debug' => ["default" => false, "type" => 'boolean'],
         'language' => ["default" => "de", "type" => 'string'],
-
-        'statistics' => ["default" => 0, "type" => 'integer'],
-        'statistics_level' => ["default" => 0, "type" => 'integer'],
-        'statistics_last_update' => ["default" => 0, "type" => 'integer'],
-        'statistics_settings' => ["default" => 0, "type" => 'integer'],
-        'statistics_update_time' => ["default" => 0, "type" => 'integer'],
-        'statistics_last_db_update' => ["default" => 0, "type" => 'integer'],
-        'statistics_fly_lock' => ["default" => false, "type" => 'boolean'],
-
-        'cron_lock' => ["default" => false, "type" => 'boolean'],
 
         'news_active' => ["default" => true, "type" => 'boolean'],
         'news_text' => ["default" => "", "type" => 'string'],
@@ -178,6 +163,13 @@ class Config
     public static function getConfigParameters()
     {
         return self::$universeConfigItems;
+    }
+    public static function getUniverseConfigItems() {
+        return self::$universeConfigItems;
+    }
+
+    public static function getUniverseConfigKeys() {
+        return array_keys(self::$universeConfigItems);
     }
 
     // Global configkeys

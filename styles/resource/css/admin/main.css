@@ -874,10 +874,6 @@ h6,
       color: #f2994a; }
 
 /* =========== tables css =========== */
-.table > :not(caption) > * > * {
-  padding: 15px 0;
-  border-bottom-color: #efefef;
-  vertical-align: middle; }
 
 .table > :not(:last-child) > :last-child > * {
   border-bottom-color: #efefef; }
