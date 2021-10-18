@@ -79,7 +79,8 @@
             </button>
             <div class="collapse " id="ally-collapse">
                 <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-                    <li class="nav-item"><a class="nav-link link-dark rounded" href="game.php?page=alliance">{$LNG.lm_overview}</a></li>
+                    <li class="nav-item"><a class="nav-link link-dark rounded" href="game.php?page=alliance">{$LNG.lm_alliance_overview}</a></li>
+                    <li class="nav-item"><a class="nav-link link-dark rounded" href="game.php?page=allianceBoard">{$LNG.lm_ally_board}</a></li>
                     <li class="nav-item"><a class="nav-link link-dark rounded" href="#" onclick="return Dialog.AllianceChat();">{$LNG.al_goto_chat}</a></li>
                     <li class="nav-item"><a class="nav-link link-dark rounded" href="?page=alliance&amp;mode=memberList">{$LNG.al_user_list}</a></li>
                 </ul>

@@ -68,5 +68,8 @@ $dbTableNames	= array(
 	'VARS_REQUIRE'	 	=> DB_PREFIX.'vars_requriements',
     'COINPOT'           => DB_PREFIX.'coinpot',
     'STATS'             => DB_PREFIX.'statistics',
+    'BOARD_CATEGORIES'  => DB_PREFIX.'board_categories',
+    'BOARD_THREADS'     => DB_PREFIX.'board_threads',
+    'BOARD_POSTINGS'    => DB_PREFIX.'board_postings',
     );
 // MOD-TABLES

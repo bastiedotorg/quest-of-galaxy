@@ -78,6 +78,7 @@ $LNG['lm_fleettrader']						= 'Schrotthändler';
 $LNG['lm_technology']						= 'Technologiebaum';
 $LNG['lm_messages']						= 'Nachrichten';
 $LNG['lm_alliance']						= 'Allianz';
+$LNG['lm_alliance_overview']						= 'Allianzübersicht';
 $LNG['lm_buddylist']						= 'Buddylist';
 $LNG['lm_notes']						= 'Notizen';
 $LNG['lm_statistics']						= 'Statistik';
@@ -1385,3 +1386,19 @@ $LNG['storage_too_small'] = 'Speicher zu klein!';
 
 $LNG['not_enough_darkmatter'] = 'Nicht genügend dunkle Materie!';
 $LNG['instant_build'] = 'Sofortbau';
+
+$LNG['lm_ally_board'] = 'Allianzforum';
+$LNG['ally_board_thread'] = 'Titel';
+$LNG['ally_board_creator'] = 'Verfasser';
+$LNG['ally_board_created'] = 'Erstellt am';
+$LNG['ally_board_create_thread'] = 'Neuen Thread eröffnen';
+$LNG['ally_board_thread_text'] = 'Text';
+$LNG['ally_board_create'] = 'Erstellen';
+$LNG['ally_board_category'] = 'Kategorie';
+$LNG['ally_board_create_category'] = 'Kategorie erstellen';
+$LNG['ally_board_respond'] = 'Antworten';
+$LNG['ally_board_posting_intro'] = 'von %s am %s Uhr';
+$LNG['ally_board_never_posted'] = 'Kein Beitrag';
+$LNG['ally_board_posted'] = 'Letzter Beitrag';
+
+$LNG['ally_board_latest_post'] = 'Letzter Beitrag';
